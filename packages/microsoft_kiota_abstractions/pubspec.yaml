@@ -16,7 +16,7 @@ environment:
 resolution: workspace
 
 dependencies:
-  meta: ^1.16.0
+  meta: ^1.15.0
   std_uritemplate: ^2.0.1
   uuid: ^4.5.1
 
