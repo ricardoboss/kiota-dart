@@ -1,8 +1,8 @@
-/// This library implements deserialization for text/plain responses.
+/// This library implements deserialization for multipart responses.
 ///
 /// This library is not meant to be used directly, but rather to be used as a
 /// dependency in the generated code.
-library microsoft_kiota_serialization_text;
+library microsoft_kiota_serialization_multipart;
 
 import 'dart:convert';
 import 'dart:typed_data';
