@@ -8,10 +8,10 @@
         "lib/src/kiota_client_factory.dart"
       ]
     },
-    "packages/microsoft_kiota_form": {},
-    "packages/microsoft_kiota_json": {},
-    "packages/microsoft_kiota_multipart": {},
-    "packages/microsoft_kiota_text": {}
+    "packages/microsoft_kiota_serialization_form": {},
+    "packages/microsoft_kiota_serialization_json": {},
+    "packages/microsoft_kiota_serialization_multipart": {},
+    "packages/microsoft_kiota_serialization_text": {}
   },
   "$schema": "https://raw.githubusercontent.com/googleapis/release-please/main/schemas/config.json"
 }
