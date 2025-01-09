@@ -1,4 +1,5 @@
 {
+  "bootstrap-sha": "2a8af621560ba6fa2419b3f6997f61e621a4c393",
   "release-type": "dart",
   "packages": {
     "packages/microsoft_kiota_abstractions": {},
