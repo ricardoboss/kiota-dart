@@ -1,5 +1,7 @@
 # Kiota Text Serialization Library for Dart
 
+[![Pub Version](https://img.shields.io/pub/v/microsoft_kiota_serialization_text?logo=dart&label=Latest)](https://pub.dev/packages/microsoft_kiota_serialization_text)
+
 The Text Serialization Library for Dart is the Dart Text serialization library implementation to handle text/plain responses.
 
 A [Kiota](https://github.com/microsoft/kiota) generated project will need a reference to a Text serialization package to handle text/plain payloads from an API endpoint.

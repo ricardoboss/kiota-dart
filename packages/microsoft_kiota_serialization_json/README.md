@@ -1,5 +1,7 @@
 # Kiota Json Serialization Library for Dart
 
+[![Pub Version](https://img.shields.io/pub/v/microsoft_kiota_serialization_json?logo=dart&label=Latest)](https://pub.dev/packages/microsoft_kiota_serialization_json)
+
 The Json Serialization Library for Dart is the Dart JSON serialization library.
 
 A [Kiota](https://github.com/microsoft/kiota) generated project will need a reference to a json serialization package to handle json payloads from an API endpoint.

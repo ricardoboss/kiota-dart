@@ -1,5 +1,7 @@
 # Kiota Abstractions Library for Dart
 
+[![Pub Version](https://img.shields.io/pub/v/microsoft_kiota_abstractions?logo=dart&label=Latest)](https://pub.dev/packages/microsoft_kiota_abstractions)
+
 The Kiota abstractions Library for Dart is the Dart library defining the basic constructs Kiota projects need once an SDK has been generated from an OpenAPI definition.
 
 A [Kiota](https://github.com/microsoft/kiota) generated project will need a reference to the abstraction package to build and run.

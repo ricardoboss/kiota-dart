@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    tags: ['v*']
+    tags: ['microsoft_kiota_abstractions-v*']
     branches: ['main']
 
 permissions:
@@ -69,6 +69,6 @@ jobs:
 
       # only push to pub.dev when a tag was created
       - name: Release to pub.dev
-        if: startsWith(github.ref, 'refs/tags/v')
+        if: startsWith(github.ref, 'refs/tags/microsoft_kiota_abstractions-v')
         working-directory: packages/${{ matrix.package }}
         run: dart pub publish --force

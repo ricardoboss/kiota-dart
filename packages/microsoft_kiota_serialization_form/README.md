@@ -1,5 +1,7 @@
 # Kiota URI Form Encoded Serialization Library for Dart
 
+[![Pub Version](https://img.shields.io/pub/v/microsoft_kiota_serialization_form?logo=dart&label=Latest)](https://pub.dev/packages/microsoft_kiota_serialization_form)
+
 The Form Serialization Library for Dart is the Dart `application/x-www-form-urlencoded` serialization library implementation.
 
 A [Kiota](https://github.com/microsoft/kiota) generated project will need a reference to a form serialization package to handle `application/x-www-form-urlencoded` payloads from a supporting API endpoint.

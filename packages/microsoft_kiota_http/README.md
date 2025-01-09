@@ -1,5 +1,7 @@
 # Kiota Http Library for Dart
 
+[![Pub Version](https://img.shields.io/pub/v/microsoft_kiota_http?logo=dart&label=Latest)](https://pub.dev/packages/microsoft_kiota_http)
+
 The Kiota HTTP Library for Dart is the Dart HTTP library implementation with the [`http` package](https://pub.dev/packages/http).
 
 A [Kiota](https://github.com/microsoft/kiota) generated project will need a reference to a HTTP package to make HTTP requests to an API endpoint.

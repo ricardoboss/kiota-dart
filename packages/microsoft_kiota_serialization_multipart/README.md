@@ -1,5 +1,7 @@
 # Kiota Multipart Serialization Library for Dart
 
+[![Pub Version](https://img.shields.io/pub/v/microsoft_kiota_serialization_multipart?logo=dart&label=Latest)](https://pub.dev/packages/microsoft_kiota_serialization_multipart)
+
 The Multipart Serialization Library for Dart is the Dart Multipart serialization library implementation.
 
 A [Kiota](https://github.com/microsoft/kiota) generated project will need a reference to a multipart serialization package to handle multipart payloads from an API endpoint.
