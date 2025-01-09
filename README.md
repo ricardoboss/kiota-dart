@@ -6,6 +6,10 @@ A [Kiota](https://github.com/microsoft/kiota) generated project will need a refe
 
 Read more about Kiota [here](https://github.com/microsoft/kiota/blob/main/README.md).
 
+## Build Status
+
+[![Build, Test](https://github.com/microsoft/kiota-dart/actions/workflows/dart.yml/badge.svg?branch=main)](https://github.com/microsoft/kiota-dart/actions/workflows/dart.yml)
+
 ## Libraries
 
 | Library                                                                                   | pub.dev Release                                                                                                                                                                 |
