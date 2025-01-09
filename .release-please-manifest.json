@@ -1,3 +1,9 @@
 {
-  ".": "0.0.0"
+  "packages/microsoft_kiota_abstractions": "0.0.2",
+  "packages/microsoft_kiota_bundle":"0.0.2",
+  "packages/microsoft_kiota_http": "0.0.2",
+  "packages/microsoft_kiota_form":"0.0.2",
+  "packages/microsoft_kiota_json": "0.0.2",
+  "packages/microsoft_kiota_multipart":"0.0.2",
+  "packages/microsoft_kiota_text": "0.0.2"
 }
