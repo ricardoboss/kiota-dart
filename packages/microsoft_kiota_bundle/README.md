@@ -1,5 +1,7 @@
 # Kiota Bundle Library for Dart
 
+[![Pub Version](https://img.shields.io/pub/v/microsoft_kiota_bundle?logo=dart&label=Latest)](https://pub.dev/packages/microsoft_kiota_bundle)
+
 The Kiota Bundle Library for Dart is the Dart library providing default implementations for client setup.
 The package provides a request adapter implementation with defaults serialization libraries setup fo use with a generated Kiota client.
 
