@@ -37,10 +37,10 @@ void main() {
 
     // This should register the default serializers/deserializers
     final _ = DefaultRequestAdapter(
-      client: client,
       authProvider: authProvider,
       pNodeFactory: pNodeFactory,
       sWriterFactory: sWriterFactory,
+      client: client,
     );
 
     final serializers = SerializationWriterFactoryRegistry
