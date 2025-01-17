@@ -11,6 +11,7 @@ on:
       - 'microsoft_kiota_serialization_text-v*'
       - 'microsoft_kiota_serialization_multipart-v*'
     branches: ['main']
+  workflow_dispatch:
 
 permissions:
   contents: write
