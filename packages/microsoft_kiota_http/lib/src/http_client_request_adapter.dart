@@ -2,14 +2,16 @@ part of '../microsoft_kiota_http.dart';
 
 class HttpClientRequestAdapter implements RequestAdapter {
   HttpClientRequestAdapter({
-    required http.Client client,
     required AuthenticationProvider authProvider,
-    required ParseNodeFactory pNodeFactory,
-    required SerializationWriterFactory sWriterFactory,
-  })  : _client = client,
-        _authProvider = authProvider,
-        _pNodeFactory = pNodeFactory,
-        _sWriterFactory = sWriterFactory;
+    ParseNodeFactory? pNodeFactory,
+    SerializationWriterFactory? sWriterFactory,
+    http.Client? client,
+  })  : _authProvider = authProvider,
+        _pNodeFactory =
+            pNodeFactory ?? ParseNodeFactoryRegistry.defaultInstance,
+        _sWriterFactory = sWriterFactory ??
+            SerializationWriterFactoryRegistry.defaultInstance,
+        _client = client ?? KiotaClientFactory.createClient();
 
   static const String _claimsKey = 'claims';
 

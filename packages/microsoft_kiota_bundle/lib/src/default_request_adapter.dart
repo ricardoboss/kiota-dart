@@ -18,10 +18,10 @@ class DefaultRequestAdapter extends HttpClientRequestAdapter {
   /// - [TextParseNodeFactory]
   /// - [FormParseNodeFactory]
   DefaultRequestAdapter({
-    required super.client,
     required super.authProvider,
-    required super.pNodeFactory,
-    required super.sWriterFactory,
+    super.pNodeFactory,
+    super.sWriterFactory,
+    super.client,
   }) {
     _setupDefaults();
   }

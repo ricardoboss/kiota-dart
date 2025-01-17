@@ -29,10 +29,10 @@ void main() {
       final contentBytes = Uint8List.fromList(stringContent.codeUnits);
 
       final adapter = HttpClientRequestAdapter(
-        client: client,
         authProvider: authProvider,
         pNodeFactory: pNodeFactory,
         sWriterFactory: sWriterFactory,
+        client: client,
       );
 
       final info = RequestInformation(
