@@ -189,7 +189,7 @@ jobs:
         run: |
             TAG_COMPONENT="refs/tags/${PACKAGE_NAME//-/_}-v"
             echo $TAG_COMPONENT
-            echo ::set-output name=tag_component::$TAG_COMPONENT
+            echo "tag_component=$TAG_COMPONENT" >> $GITHUB_OUTPUT
         env:
             PACKAGE_NAME: ${{ matrix.package }}
       
