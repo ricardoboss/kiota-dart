@@ -3,8 +3,17 @@ name: Dart
 on:
   push:
     branches: [ "main" ]
+    tags:
+      - 'microsoft_kiota_abstractions-v*'
+      - 'microsoft_kiota_bundle-v*'
+      - 'microsoft_kiota_http-v*'
+      - 'microsoft_kiota_serialization_form-v*'
+      - 'microsoft_kiota_serialization_json-v*'
+      - 'microsoft_kiota_serialization_text-v*'
+      - 'microsoft_kiota_serialization_multipart-v*'
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   define-matrix:
@@ -132,3 +141,61 @@ jobs:
       - name: One or more build matrix options failed
         if: ${{ contains(needs.*.result, 'failure') }}
         run: exit 1
+
+  publish-dart:
+    name: 'Publish packages'
+    if: startsWith(github.ref, 'refs/tags/')
+
+    permissions:
+      id-token: write # Required for authentication using OIDC
+
+    needs:
+      - define-matrix
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        package: ${{ fromJson(needs.define-matrix.outputs.packages) }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Dart
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: stable
+
+      - name: Cache dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ env.PUB_CACHE }}
+          key: ${{ runner.os }}-pub
+
+      - name: Install dependencies
+        run: dart pub get
+        working-directory: packages/${{ matrix.package }}
+
+      - name: Prepare package
+        run: dart run tooling prepare ${{ matrix.package }}
+        working-directory: tooling
+
+      - name: Release dry run
+        working-directory: packages/${{ matrix.package }}
+        run: dart pub publish --dry-run
+
+      # only push to pub.dev when a tag was created for that package
+      - name: get package tag component
+        id: get_tag_component
+        run: |
+            TAG_COMPONENT="refs/tags/${PACKAGE_NAME//-/_}-v"
+            echo $TAG_COMPONENT
+            echo "tag_component=$TAG_COMPONENT" >> $GITHUB_OUTPUT
+        env:
+            PACKAGE_NAME: ${{ matrix.package }}
+      
+      - name: Release to pub.dev
+        if: startsWith(github.ref, steps.get_tag_component.outputs.tag_component)
+        working-directory: packages/${{ matrix.package }}
+        run: dart pub publish --force
+      
