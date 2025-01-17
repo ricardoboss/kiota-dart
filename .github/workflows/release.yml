@@ -74,8 +74,17 @@ jobs:
         working-directory: packages/${{ matrix.package }}
         run: dart pub publish --dry-run
 
-      # only push to pub.dev when a tag was created
+      # only push to pub.dev when a tag was created for that package
+      - name: get package tag component
+        id: get_tag_component
+        run: |
+            TAG_COMPONENT="refs/tags/${PACKAGE_NAME//-/_}-v"
+            echo $TAG_COMPONENT
+            echo ::set-output name=tag_component::$TAG_COMPONENT
+        env:
+            PACKAGE_NAME: ${{ matrix.package }}
+      
       - name: Release to pub.dev
-        if: startsWith(github.ref, 'refs/tags/microsoft_kiota_abstractions-v') && matrix.package == 'microsoft_kiota_abstractions' || startsWith(github.ref, 'refs/tags/microsoft_kiota_bundle-v') && matrix.package == 'microsoft_kiota_bundle' || startsWith(github.ref, 'refs/tags/microsoft_kiota_http-v') && matrix.package == 'microsoft_kiota_http' || startsWith(github.ref, 'refs/tags/microsoft_kiota_serialization_form-v') && matrix.package == 'microsoft_kiota_serialization_form' || startsWith(github.ref, 'refs/tags/microsoft_kiota_serialization_json-v') && matrix.package == 'microsoft_kiota_serialization_json' || startsWith(github.ref, 'refs/tags/microsoft_kiota_serialization_text-v') && matrix.package == 'microsoft_kiota_serialization_text' || startsWith(github.ref, 'refs/tags/microsoft_kiota_serialization_multipart-v') && matrix.package == 'microsoft_kiota_serialization_multipart'
+        if: startsWith(github.ref, steps.get_tag_component.outputs.tag_component)
         working-directory: packages/${{ matrix.package }}
         run: dart pub publish --force
