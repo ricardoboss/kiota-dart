@@ -6,12 +6,12 @@ class HttpClientRequestAdapter implements RequestAdapter {
     ParseNodeFactory? pNodeFactory,
     SerializationWriterFactory? sWriterFactory,
     http.Client? client,
-  })  : _client = client ?? KiotaClientFactory.createClient(),
-        _authProvider = authProvider,
+  })  : _authProvider = authProvider,
         _pNodeFactory =
             pNodeFactory ?? ParseNodeFactoryRegistry.defaultInstance,
         _sWriterFactory = sWriterFactory ??
-            SerializationWriterFactoryRegistry.defaultInstance;
+            SerializationWriterFactoryRegistry.defaultInstance,
+        _client = client ?? KiotaClientFactory.createClient();
 
   static const String _claimsKey = 'claims';
 
