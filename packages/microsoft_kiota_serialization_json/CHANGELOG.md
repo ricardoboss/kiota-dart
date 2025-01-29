@@ -1,5 +1,12 @@
 # Unreleased
 
+## [0.0.3](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_serialization_json-v0.0.2...microsoft_kiota_serialization_json-v0.0.3) (2025-01-29)
+
+
+### Bug Fixes
+
+* check for null in getBoolValue ([#83](https://github.com/microsoft/kiota-dart/issues/83)) ([77e2826](https://github.com/microsoft/kiota-dart/commit/77e282639802bd427d0b3a28c31a29dd69f3c1f6))
+
 ## [0.0.2](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_serialization_json-v0.0.1...microsoft_kiota_serialization_json-v0.0.2) (2025-01-10)
 
 
