@@ -1,5 +1,8 @@
 part of '../microsoft_kiota_http.dart';
 
+/// A helper to get a [Type] from a nullable generic parameter.
+typedef _TypeOf<T> = T;
+
 class HttpClientRequestAdapter implements RequestAdapter {
   HttpClientRequestAdapter({
     required AuthenticationProvider authProvider,
@@ -242,6 +245,14 @@ class HttpClientRequestAdapter implements RequestAdapter {
     await _throwIfFailedResponse(response, errorMapping);
   }
 
+  /// Checks if [T] is exactly [U] or [U?].
+  @pragma('vm:prefer-inline')
+  bool _isA<T, U>() => T == U || T == _TypeOf<U?>;
+
+  /// A hacky way to check if [T] is a exactly or a subtype of [U].
+  @pragma('vm:prefer-inline')
+  bool _isSubtype<T, U>() => <T>[] is List<U>;
+
   @override
   Future<ModelType?> sendPrimitive<ModelType>(
     RequestInformation requestInfo, [
@@ -254,29 +265,28 @@ class HttpClientRequestAdapter implements RequestAdapter {
       return null;
     }
 
-    switch (ModelType) {
-      case const (bool):
-        return rootNode.getBoolValue() as ModelType;
-      case const (int):
-        return rootNode.getIntValue() as ModelType;
-      case const (double):
-        return rootNode.getDoubleValue() as ModelType;
-      case const (String):
-        return rootNode.getStringValue() as ModelType;
-      case const (DateTime):
-        return rootNode.getDateTimeValue() as ModelType;
-      case const (DateOnly):
-        return rootNode.getDateOnlyValue() as ModelType;
-      case const (TimeOnly):
-        return rootNode.getTimeOnlyValue() as ModelType;
-      case const (Duration):
-        return rootNode.getDurationValue() as ModelType;
-      case const (UuidValue):
-        return rootNode.getGuidValue() as ModelType;
-      default:
-        throw ArgumentError(
-          'The type $ModelType is not supported for primitive deserialization',
-        );
+    if (_isA<ModelType, bool>()) {
+      return rootNode.getBoolValue() as ModelType;
+    } else if (_isA<ModelType, int>()) {
+      return rootNode.getIntValue() as ModelType;
+    } else if (_isA<ModelType, double>()) {
+      return rootNode.getDoubleValue() as ModelType;
+    } else if (_isA<ModelType, String>()) {
+      return rootNode.getStringValue() as ModelType;
+    } else if (_isA<ModelType, DateTime>()) {
+      return rootNode.getDateTimeValue() as ModelType;
+    } else if (_isSubtype<ModelType, DateOnly?>()) {
+      return rootNode.getDateOnlyValue() as ModelType;
+    } else if (_isSubtype<ModelType, TimeOnly?>()) {
+      return rootNode.getTimeOnlyValue() as ModelType;
+    } else if (_isA<ModelType, Duration>()) {
+      return rootNode.getDurationValue() as ModelType;
+    } else if (_isA<ModelType, UuidValue>()) {
+      return rootNode.getGuidValue() as ModelType;
+    } else {
+      throw ArgumentError(
+        'The type $ModelType is not supported for primitive deserialization',
+      );
     }
   }
 
