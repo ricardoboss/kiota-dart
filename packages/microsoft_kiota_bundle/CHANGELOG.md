@@ -1,5 +1,12 @@
 ## Unreleased
 
+## [0.1.0](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_bundle-v0.0.4...microsoft_kiota_bundle-v0.1.0) (2025-02-19)
+
+
+### Features
+
+* Export abstractions from bundle package ([#86](https://github.com/microsoft/kiota-dart/issues/86)) ([feed482](https://github.com/microsoft/kiota-dart/commit/feed482eab9201bcebbe5522d2c56c7e4ea7af50))
+
 ## [0.0.4](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_bundle-v0.0.3...microsoft_kiota_bundle-v0.0.4) (2025-01-29)
 
 
