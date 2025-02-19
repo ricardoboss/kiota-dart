@@ -1,5 +1,12 @@
 # Unreleased
 
+## [0.0.5](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_http-v0.0.4...microsoft_kiota_http-v0.0.5) (2025-02-19)
+
+
+### Bug Fixes
+
+* Fix nullable primitive responses ([#87](https://github.com/microsoft/kiota-dart/issues/87)) ([428015b](https://github.com/microsoft/kiota-dart/commit/428015b7eebd7a15ca6326efb2ebc07efed3bcbf))
+
 ## [0.0.4](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_http-v0.0.3...microsoft_kiota_http-v0.0.4) (2025-01-29)
 
 
