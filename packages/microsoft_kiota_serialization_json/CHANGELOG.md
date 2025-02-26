@@ -1,5 +1,12 @@
 # Unreleased
 
+## [0.0.4](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_serialization_json-v0.0.3...microsoft_kiota_serialization_json-v0.0.4) (2025-02-26)
+
+
+### Bug Fixes
+
+* type int is not a subtype of double in type cast in json parse node ([209a587](https://github.com/microsoft/kiota-dart/commit/209a587222f166ef2e82d2a777e85b5329173f74))
+
 ## [0.0.3](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_serialization_json-v0.0.2...microsoft_kiota_serialization_json-v0.0.3) (2025-01-29)
 
 
