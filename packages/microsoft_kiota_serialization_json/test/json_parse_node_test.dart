@@ -1,8 +1,11 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:microsoft_kiota_abstractions/microsoft_kiota_abstractions.dart';
 import 'package:microsoft_kiota_serialization_json/microsoft_kiota_serialization_json.dart';
+import 'package:microsoft_kiota_serialization_json/src/json_parse_exception.dart';
 import 'package:test/test.dart';
+import 'package:uuid/uuid.dart';
 
 import 'derived_microsoft_graph_user.dart';
 import 'microsoft_graph_user.dart';
@@ -179,7 +182,7 @@ void main() {
       expect(testCollection.last, NamingEnum.item3SubItem1);
     });
 
-    test('Get collection of primitive values from json', () {
+    test('Get collection of int (primitive) values from json', () {
       final jsonParseNode = JsonParseNode(jsonDecode('[2,3,5]'));
       final testCollection =
           jsonParseNode.getCollectionOfPrimitiveValues<int>();
@@ -188,6 +191,128 @@ void main() {
       expect(testCollection.length, 3);
       expect(testCollection.first, 2);
       expect(testCollection.last, 5);
+    });
+
+    test('Get collection of DateTime (primitive) values from json', () {
+      final jsonParseNode =
+          JsonParseNode(jsonDecode('["2025-07-30T23:39:48.101Z"]'));
+      final testCollection =
+          jsonParseNode.getCollectionOfPrimitiveValues<DateTime>();
+
+      expect(testCollection, isNotNull);
+      expect(testCollection.length, 1);
+      expect(testCollection.first, DateTime.utc(2025, 7, 30, 23, 39, 48, 101));
+    });
+
+    test('Get collection of DateOnly (primitive) values from json', () {
+      final jsonParseNode = JsonParseNode(jsonDecode('["2025-07-30"]'));
+      final testCollection =
+          jsonParseNode.getCollectionOfPrimitiveValues<DateOnly>();
+
+      expect(testCollection, isNotNull);
+      expect(testCollection.length, 1);
+      expect(testCollection.first, DateOnly.fromComponents(2025, 7, 30));
+    });
+
+    test('Get collection of TimeOnly (primitive) values from json', () {
+      final jsonParseNode = JsonParseNode(jsonDecode('["23:39:48.101"]'));
+      final testCollection =
+          jsonParseNode.getCollectionOfPrimitiveValues<TimeOnly>();
+
+      expect(testCollection, isNotNull);
+      expect(testCollection.length, 1);
+      expect(testCollection.first, TimeOnly.fromComponents(23, 39, 48, 101));
+    });
+
+    test('Get collection of Duration (primitive) values from json', () {
+      final jsonParseNode = JsonParseNode(jsonDecode('["P4DT12H30M5S"]'));
+      final testCollection =
+          jsonParseNode.getCollectionOfPrimitiveValues<Duration>();
+
+      expect(testCollection, isNotNull);
+      expect(testCollection.length, 1);
+      expect(testCollection.first,
+          const Duration(days: 4, hours: 12, minutes: 30, seconds: 5));
+    });
+
+    test('Get collection of UUID (primitive) values from json', () {
+      final jsonParseNode =
+          JsonParseNode(jsonDecode('["6361d96a-8a4e-4bf5-b3b6-c00a0ea3fa28"]'));
+      final testCollection =
+          jsonParseNode.getCollectionOfPrimitiveValues<UuidValue>();
+
+      expect(testCollection, isNotNull);
+      expect(testCollection.length, 1);
+      expect(testCollection.first,
+          UuidValue.fromString('6361d96a-8a4e-4bf5-b3b6-c00a0ea3fa28'));
+    });
+
+    test('Get collection of primitive values fails for unsupported types', () {
+      final jsonParseNode = JsonParseNode(jsonDecode('["foo"]'));
+
+      expect(
+        () => jsonParseNode.getCollectionOfPrimitiveValues<Uint8List>(),
+        throwsA(
+          isA<JsonParseException>().having(
+            (e) => e.message,
+            'message',
+            equals(
+              'The type Uint8List is not supported for primitive deserialization',
+            ),
+          ),
+        ),
+      );
+    });
+
+    test('Get collection of primitive values fails for mixed types (simple)', () {
+      final jsonParseNode = JsonParseNode(jsonDecode('[0, 1, 2, "foo"]'));
+
+      expect(
+        () => jsonParseNode.getCollectionOfPrimitiveValues<int>(),
+        throwsA(
+          isA<JsonParseException>().having(
+            (e) => e.message,
+            'message',
+            equals(
+              'Not every element in the collection of primitives is a int',
+            ),
+          ),
+        ),
+      );
+    });
+
+    test('Get collection of primitive values fails for mixed types (complex)', () {
+      final jsonParseNode = JsonParseNode(jsonDecode('["foo", 0]'));
+
+      expect(
+        () => jsonParseNode.getCollectionOfPrimitiveValues<DateTime>(),
+        throwsA(
+          isA<JsonParseException>().having(
+            (e) => e.message,
+            'message',
+            equals(
+              'Not every element in the collection of primitives is a String and thus cannot be converted to a DateTime',
+            ),
+          ),
+        ),
+      );
+    });
+
+    test('Get collection of primitive values throws for invalid values (DateTime)', () {
+      final jsonParseNode = JsonParseNode(jsonDecode('["foo"]'));
+
+      expect(
+        () => jsonParseNode.getCollectionOfPrimitiveValues<DateTime>(),
+        throwsA(
+          isA<FormatException>().having(
+            (e) => e.message,
+            'message',
+            equals(
+              'Invalid date format',
+            ),
+          ),
+        ),
+      );
     });
 
     test('getBoolValue', () {

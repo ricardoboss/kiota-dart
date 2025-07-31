@@ -10,6 +10,7 @@ environment:
 resolution: workspace
 
 dependencies:
+  iso_duration: ^0.1.1
   microsoft_kiota_abstractions: ^0.0.1
   uuid: ^4.5.1
 
