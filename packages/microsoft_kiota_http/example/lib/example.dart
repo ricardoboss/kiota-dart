@@ -12,7 +12,7 @@ Future<void> main() async {
           .defaultInstance.contentTypeAssociatedFactories['application/json'] =
       _CatFactsParseNodeFactory();
   final client = KiotaClientFactory.createClient();
-  final authProvider = AnonymousAuthenticationProvider();
+  const authProvider = AnonymousAuthenticationProvider();
 
   // Create the adapter
   final adapter = HttpClientRequestAdapter(

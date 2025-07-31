@@ -1,6 +1,8 @@
 part of '../../microsoft_kiota_abstractions.dart';
 
+/// Extensions for [Duration].
 extension DurationExtensions on Duration {
+  /// Tries to parse a [String] in the ISO 8601 format to a [Duration].
   static Duration? tryParse(String? value) {
     if (value == null) {
       return null;
@@ -13,7 +15,10 @@ extension DurationExtensions on Duration {
 
     final match = regex.firstMatch(value);
     if (match == null) {
-      throw ArgumentError('String does not follow correct format', 'value');
+      throw const FormatException(
+        'String does not follow correct format',
+        'value',
+      );
     }
 
     final sign = match.group(1) == '-' ? -1 : 1;

@@ -3,7 +3,9 @@ part of '../../microsoft_kiota_abstractions.dart';
 /// Provides a base class for implementing [AuthenticationProvider] for Bearer
 /// token schemes.
 class BaseBearerTokenAuthenticationProvider implements AuthenticationProvider {
-  BaseBearerTokenAuthenticationProvider(this.accessTokenProvider);
+  /// Creates a new [BaseBearerTokenAuthenticationProvider] with the given
+  /// [accessTokenProvider].
+  const BaseBearerTokenAuthenticationProvider(this.accessTokenProvider);
 
   static const _authorizationHeaderKey = 'Authorization';
   static const _claimsKey = 'claims';

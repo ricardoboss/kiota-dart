@@ -1,5 +1,6 @@
 part of '../../microsoft_kiota_abstractions.dart';
 
+/// Extension methods for [BaseRequestBuilder].
 extension BaseRequestBuilderExtensions<T extends BaseRequestBuilder<T>>
     on BaseRequestBuilder<T> {
   /// Clones the current request builder using [clone] and sets the given

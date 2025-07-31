@@ -14,6 +14,7 @@ class RequestInformation {
     }
   }
 
+  /// The key for the raw request url, which overrides the base url.
   static const rawUrlKey = 'request-raw-url';
 
   /// The URL template for the current request.

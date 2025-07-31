@@ -1,0 +1,8 @@
+﻿name: example
+
+environment:
+  sdk: ^3.6.0
+
+dependencies:
+  microsoft_kiota_abstractions:
+    path: ../

@@ -4,7 +4,7 @@ part of '../../microsoft_kiota_abstractions.dart';
 /// hooks to be added before and after the parsing of a [Parsable] object.
 abstract class ParseNodeProxyFactory implements ParseNodeFactory {
   /// Creates a new instance of the [ParseNodeProxyFactory] class.
-  ParseNodeProxyFactory({
+  const ParseNodeProxyFactory({
     required ParseNodeFactory concrete,
     ParsableHook? onBefore,
     ParsableHook? onAfter,

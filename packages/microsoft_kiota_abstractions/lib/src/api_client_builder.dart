@@ -5,6 +5,11 @@ part of '../microsoft_kiota_abstractions.dart';
 class ApiClientBuilder {
   const ApiClientBuilder._();
 
+  /// Registers a new [SerializationWriterFactory] in the
+  /// [SerializationWriterFactoryRegistry].
+  ///
+  /// The callback [factoryCreator] is invoked immediately in order to
+  /// determine the valid content types for that factory.
   static void registerDefaultSerializer<T extends SerializationWriterFactory>(
     T Function() factoryCreator,
   ) {
@@ -15,6 +20,10 @@ class ApiClientBuilder {
         .putIfAbsent(factory.validContentType, () => factory);
   }
 
+  /// Registers a new [ParseNodeFactory] in the [ParseNodeFactoryRegistry].
+  ///
+  /// The callback [factoryCreator] is invoked immediately in order to
+  /// determine the valid content types for that factory.
   static void registerDefaultDeserializer<T extends ParseNodeFactory>(
     T Function() factoryCreator,
   ) {
@@ -24,6 +33,7 @@ class ApiClientBuilder {
         .putIfAbsent(factory.validContentType, () => factory);
   }
 
+  /// Enables backing stores for [SerializationWriterFactory]s.
   static SerializationWriterFactory
       enableBackingStoreForSerializationWriterFactory(
     SerializationWriterFactory original,
@@ -38,8 +48,9 @@ class ApiClientBuilder {
         );
       }
     }
+
     if (result is BackingStoreSerializationWriterProxyFactory) {
-      //We are already enabled so use it.
+      // We are already enabled so use it.
       return result;
     } else {
       result = BackingStoreSerializationWriterProxyFactory(concrete: original);
@@ -48,6 +59,7 @@ class ApiClientBuilder {
     return result;
   }
 
+  /// Enables backing stores for [ParseNodeFactory]s.
   static ParseNodeFactory enableBackingStoreForParseNodeFactory(
     ParseNodeFactory original,
   ) {
@@ -61,8 +73,9 @@ class ApiClientBuilder {
         );
       }
     }
+
     if (result is BackingStoreParseNodeFactory) {
-      //We are already enabled so use it.
+      // We are already enabled so use it.
       return result;
     } else {
       result = BackingStoreParseNodeFactory(concrete: original);
@@ -74,7 +87,7 @@ class ApiClientBuilder {
   static void _enableBackingStoreForParseNodeRegistry(
     ParseNodeFactoryRegistry registry,
   ) {
-    final keysToUpdate = <String>[];
+    final keysToUpdate = <String>{};
     registry.contentTypeAssociatedFactories.forEach((key, value) {
       if (value is! BackingStoreParseNodeFactory) {
         keysToUpdate.add(key);
@@ -92,12 +105,10 @@ class ApiClientBuilder {
   static void _enableBackingStoreForSerializationRegistry(
     SerializationWriterFactoryRegistry registry,
   ) {
-    final keysToUpdate = <String>[];
+    final keysToUpdate = <String>{};
     registry.contentTypeAssociatedFactories.forEach((key, value) {
-      {
-        if (value is! BackingStoreSerializationWriterProxyFactory) {
-          keysToUpdate.add(key);
-        }
+      if (value is! BackingStoreSerializationWriterProxyFactory) {
+        keysToUpdate.add(key);
       }
     });
 
