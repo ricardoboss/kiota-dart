@@ -114,7 +114,17 @@ class JsonParseNode implements ParseNode {
       } else if (_isA<T, Duration>()) {
         return _convertPrimitive(
           items,
-          (i) => iso_duration.parseIso8601Duration(i) as T,
+          (i) {
+            final dur = DurationExtensions.tryParse(i);
+            if (dur == null) {
+              throw JsonParseException(
+                message: 'Failed to parse duration: $i',
+                node: this,
+              );
+            }
+
+            return dur as T;
+          },
           'Duration',
         );
       } else if (_isA<T, UuidValue>()) {
