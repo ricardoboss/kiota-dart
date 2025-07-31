@@ -9,6 +9,12 @@ class HttpHeaders extends CaseInsensitiveMap<String, Set<String>> {
   /// Creates a new instance of [HttpHeaders].
   HttpHeaders();
 
+  /// This list contains HTTP headers that can never have more than one value.
+  ///
+  /// Unlike normal HTTP headers, these can only appear once and cannot have
+  /// multiple values separated with commas.
+  ///
+  /// When setting any of these, only the first value will be stored.
   static const List<String> singleValueHeaders = [
     'content-type',
     'content-encoding',

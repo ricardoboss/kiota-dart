@@ -1,7 +1,8 @@
 part of '../../microsoft_kiota_abstractions.dart';
 
 /// Base class for untyped node.
-class UntypedNode implements Parsable {
+final class UntypedNode implements Parsable {
+  /// Constructs a new instance of the [UntypedNode].
   const UntypedNode();
 
   /// Creates a new [UntypedNode] instance.

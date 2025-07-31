@@ -2,6 +2,9 @@ part of '../../microsoft_kiota_abstractions.dart';
 
 /// Defines a contract for obtaining an access token for a given url.
 abstract class AccessTokenProvider {
+  /// Creates a new [AccessTokenProvider].
+  const AccessTokenProvider();
+
   /// Gets an access token for the given url and additional authentication
   /// context.
   Future<String> getAuthorizationToken(

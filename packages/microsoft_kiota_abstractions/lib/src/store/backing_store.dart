@@ -5,6 +5,9 @@ part of '../../microsoft_kiota_abstractions.dart';
 /// Implementations can provide dirty tracking and caching capabilities or
 /// integration with 3rd party stores.
 abstract class BackingStore {
+  /// Creates a new [BackingStore].
+  const BackingStore();
+
   /// Gets a value from the backing store based on its key. Returns `null` if
   /// the value hasn't changed and [returnOnlyChangedValues] is `true`.
   T? get<T>(String key);
@@ -38,9 +41,13 @@ abstract class BackingStore {
 
   /// Whether to return only values that have changed since the initialization
   /// of the object when calling [get] and [iterate] methods.
-  abstract bool returnOnlyChangedValues;
+  bool get returnOnlyChangedValues;
+
+  set returnOnlyChangedValues(bool value);
 
   /// Whether the initialization of the object and/or the initial
   /// deserialization has been competed to track whether objects have changed.
-  abstract bool initializationCompleted;
+  bool get initializationCompleted;
+
+  set initializationCompleted(bool value);
 }
