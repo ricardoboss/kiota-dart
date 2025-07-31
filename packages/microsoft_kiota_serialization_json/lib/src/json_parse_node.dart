@@ -1,5 +1,8 @@
 part of '../microsoft_kiota_serialization_json.dart';
 
+/// A helper to get a [Type] from a nullable generic parameter.
+typedef _TypeOf<T> = T;
+
 class JsonParseNode implements ParseNode {
   JsonParseNode(this._node);
 
@@ -70,14 +73,90 @@ class JsonParseNode implements ParseNode {
     return result;
   }
 
+  /// Checks if [T] is exactly [U] or [U?].
+  @pragma('vm:prefer-inline')
+  bool _isA<T, U>() => T == U || T == _TypeOf<U?>;
+
+  /// A hacky way to check if [T] is a exactly or a subtype of [U].
+  @pragma('vm:prefer-inline')
+  bool _isSubtype<T, U>() => <T>[] is List<U>;
+
   @override
   Iterable<T> getCollectionOfPrimitiveValues<T>() {
     final result = <T>[];
-    if (_node is List) {
-      return _node.cast<T>();
+    if (_node case final List<dynamic> items) {
+      if (_isA<T, bool>()) {
+        return _castPrimitive<T>(items, 'bool');
+      } else if (_isA<T, int>()) {
+        return _castPrimitive<T>(items, 'int');
+      } else if (_isA<T, double>()) {
+        return _castPrimitive<T>(items, 'double');
+      } else if (_isA<T, String>()) {
+        return _castPrimitive<T>(items, 'String');
+      } else if (_isA<T, DateTime>()) {
+        return _convertPrimitive(
+          items,
+          (i) => DateTime.parse(i) as T,
+          'DateTime',
+        );
+      } else if (_isSubtype<T, DateOnly?>()) {
+        return _convertPrimitive(
+          items,
+          (i) => DateOnly.fromDateTimeString(i) as T,
+          'DateOnly',
+        );
+      } else if (_isSubtype<T, TimeOnly?>()) {
+        return _convertPrimitive(
+          items,
+          (i) => TimeOnly.fromDateTimeString(i) as T,
+          'TimeOnly',
+        );
+      } else if (_isA<T, Duration>()) {
+        return _convertPrimitive(
+          items,
+          (i) => iso_duration.parseIso8601Duration(i) as T,
+          'Duration',
+        );
+      } else if (_isA<T, UuidValue>()) {
+        return _convertPrimitive(
+          items,
+          (i) => UuidValue.raw(i) as T,
+          'UuidValue',
+        );
+      } else {
+        throw JsonParseException(
+          message: 'The type $T is not supported for primitive deserialization',
+          node: this,
+        );
+      }
     }
 
     return result;
+  }
+
+  List<T> _castPrimitive<T>(List<dynamic> items, String primitiveName) {
+    if (!items.every((i) => i is T)) {
+      throw JsonParseException(
+        message:
+            'Not every element in the collection of primitives is a $primitiveName',
+        node: this,
+      );
+    }
+
+    return items.cast<T>();
+  }
+
+  List<T> _convertPrimitive<T>(List<dynamic> items,
+      T Function(String value) converter, String primitiveName) {
+    if (!items.every((i) => i is String)) {
+      throw JsonParseException(
+        message:
+            'Not every element in the collection of primitives is a String and thus cannot be converted to a $primitiveName',
+        node: this,
+      );
+    }
+
+    return items.cast<String>().map(converter).toList();
   }
 
   @override
