@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:microsoft_kiota_abstractions/microsoft_kiota_abstractions.dart';
 import 'package:microsoft_kiota_http/microsoft_kiota_http.dart';

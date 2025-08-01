@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:http/http.dart' as http;
 import 'package:microsoft_kiota_abstractions/microsoft_kiota_abstractions.dart';
 import 'package:microsoft_kiota_http/microsoft_kiota_http.dart';
