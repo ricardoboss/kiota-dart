@@ -133,7 +133,7 @@ class CaseInsensitiveMap<K extends String, V> implements Map<K, V> {
     final keys = _contents.keys.toList();
 
     for (final key in keys) {
-      if (test(_originalKeys[key]!, _contents[key]!)) {
+      if (test(_originalKeys[key]!, _contents[key] as V)) {
         _originalKeys.remove(key);
         _contents.remove(key);
       }
@@ -154,7 +154,7 @@ class CaseInsensitiveMap<K extends String, V> implements Map<K, V> {
     final keys = _contents.keys.toList();
 
     for (final key in keys) {
-      _contents[key] = update(_originalKeys[key]!, _contents[key]!);
+      _contents[key] = update(_originalKeys[key]!, _contents[key] as V);
     }
   }
 

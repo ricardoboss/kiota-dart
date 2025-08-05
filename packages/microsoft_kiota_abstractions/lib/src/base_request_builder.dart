@@ -2,6 +2,7 @@ part of '../microsoft_kiota_abstractions.dart';
 
 /// Base class for all request builders.
 abstract class BaseRequestBuilder<T extends BaseRequestBuilder<T>> {
+  /// Creates a new [BaseRequestBuilder].
   BaseRequestBuilder(
     this.requestAdapter,
     this.urlTemplate,

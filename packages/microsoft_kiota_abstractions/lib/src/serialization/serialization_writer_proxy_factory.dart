@@ -1,8 +1,12 @@
 part of '../../microsoft_kiota_abstractions.dart';
 
+/// A factory that creates a proxy for a [SerializationWriterFactory] that
+/// allows for hooks to be added before and after the serialization of a
+/// [Parsable] object.
 abstract class SerializationWriterProxyFactory
     implements SerializationWriterFactory {
-  SerializationWriterProxyFactory({
+  /// Creates a new [SerializationWriterProxyFactory].
+  const SerializationWriterProxyFactory({
     required SerializationWriterFactory concrete,
     ParsableHook? onBefore,
     ParsableHook? onAfter,

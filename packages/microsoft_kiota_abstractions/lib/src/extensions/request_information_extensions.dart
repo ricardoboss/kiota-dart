@@ -2,6 +2,7 @@ part of '../../microsoft_kiota_abstractions.dart';
 
 /// Adds extension methods to the [RequestInformation] class.
 extension RequestInformationExtensions on RequestInformation {
+  /// The canonical name for the 'Content-Type' header.
   static const contentTypeHeader = 'Content-Type';
 
   /// Adds a request option to the request.
@@ -137,6 +138,11 @@ extension RequestInformationExtensions on RequestInformation {
     content = writer.getSerializedContent();
   }
 
+  /// Provides an easy way to configure a [RequestConfiguration].
+  ///
+  /// The [configurator] is called with a blank configuration.
+  /// Afterwards, all properties are copied to the instance this method was
+  /// called on.
   void configure<T extends AbstractQueryParameters>(
     void Function(RequestConfiguration<T>)? configurator,
     T Function()? createParameters,
