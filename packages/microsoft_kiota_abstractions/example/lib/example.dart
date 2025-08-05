@@ -1,4 +1,6 @@
-﻿import 'package:microsoft_kiota_abstractions/microsoft_kiota_abstractions.dart';
+﻿// ignore_for_file: unused_local_variable, avoid_print
+
+import 'package:microsoft_kiota_abstractions/microsoft_kiota_abstractions.dart';
 
 Future<void> main() async {
   // The abstractions package contains all the foundational code on which
@@ -30,8 +32,8 @@ Future<void> main() async {
   // adding) and preserves the actual key.
 
   final headers = HttpHeaders();
-  headers["Foo"] = {"Bar"};
-  print(headers["FOO"]); // prints: "Bar"
+  headers['Foo'] = {'Bar'};
+  print(headers['FOO']); // prints: "Bar"
   print(headers.keys); // prints: ["Foo"]
 
   ////////////////////////////////////////////////////////////////////////
@@ -40,12 +42,12 @@ Future<void> main() async {
   // represents a generic, serializable object, that can hold multiple "parts"
   // with different content types
 
-  final body = MultipartBody();
-  body.addOrReplace('name', 'text/plain', 'Ricardo');
-  body.addOrReplace('settings', 'application/json', {
-    'themeMode': 'system',
-    'accentColor': '#33aa66',
-  });
+  final body = MultipartBody()
+    ..addOrReplace('name', 'text/plain', 'Ricardo')
+    ..addOrReplace('settings', 'application/json', {
+      'themeMode': 'system',
+      'accentColor': '#33aa66',
+    });
 
   print(body.getPartValue('name')); // prints: "Ricardo"
   body.removePart('name'); // only part left is "settings"
@@ -60,7 +62,7 @@ Future<void> main() async {
     pathParameters: {
       'id': 123,
     },
-    urlTemplate: 'https://example.com/{id}/foo'
+    urlTemplate: 'https://example.com/{id}/foo',
   );
 
   ////////////////////////////////////////////////////////////////////////
