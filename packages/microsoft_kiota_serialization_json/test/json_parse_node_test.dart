@@ -231,8 +231,10 @@ void main() {
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 1);
-      expect(testCollection.first,
-          const Duration(days: 4, hours: 12, minutes: 30, seconds: 5));
+      expect(
+        testCollection.first,
+        const Duration(days: 4, hours: 12, minutes: 30, seconds: 5),
+      );
     });
 
     test('Get collection of UUID (primitive) values from json', () {
@@ -243,8 +245,10 @@ void main() {
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 1);
-      expect(testCollection.first,
-          UuidValue.fromString('6361d96a-8a4e-4bf5-b3b6-c00a0ea3fa28'));
+      expect(
+        testCollection.first,
+        UuidValue.fromString('6361d96a-8a4e-4bf5-b3b6-c00a0ea3fa28'),
+      );
     });
 
     test('Get collection of primitive values fails for unsupported types', () {
@@ -264,7 +268,8 @@ void main() {
       );
     });
 
-    test('Get collection of primitive values fails for mixed types (simple)', () {
+    test('Get collection of primitive values fails for mixed types (simple)',
+        () {
       final jsonParseNode = JsonParseNode(jsonDecode('[0, 1, 2, "foo"]'));
 
       expect(
@@ -281,7 +286,8 @@ void main() {
       );
     });
 
-    test('Get collection of primitive values fails for mixed types (complex)', () {
+    test('Get collection of primitive values fails for mixed types (complex)',
+        () {
       final jsonParseNode = JsonParseNode(jsonDecode('["foo", 0]'));
 
       expect(
@@ -298,7 +304,9 @@ void main() {
       );
     });
 
-    test('Get collection of primitive values throws for invalid values (DateTime)', () {
+    test(
+        'Get collection of primitive values throws for invalid values (DateTime)',
+        () {
       final jsonParseNode = JsonParseNode(jsonDecode('["foo"]'));
 
       expect(

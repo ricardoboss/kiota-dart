@@ -156,8 +156,11 @@ class JsonParseNode implements ParseNode {
     return items.cast<T>();
   }
 
-  List<T> _convertPrimitive<T>(List<dynamic> items,
-      T Function(String value) converter, String primitiveName) {
+  List<T> _convertPrimitive<T>(
+    List<dynamic> items,
+    T Function(String value) converter,
+    String primitiveName,
+  ) {
     if (!items.every((i) => i is String)) {
       throw JsonParseException(
         message:
