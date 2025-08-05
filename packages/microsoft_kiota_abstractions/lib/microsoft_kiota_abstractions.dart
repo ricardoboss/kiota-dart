@@ -15,6 +15,8 @@ import 'package:meta/meta.dart';
 import 'package:std_uritemplate/std_uritemplate.dart';
 import 'package:uuid/uuid.dart';
 
+export 'dart:typed_data' show Uint8List;
+
 part 'src/abstract_query_parameters.dart';
 part 'src/api_client_builder.dart';
 part 'src/api_exception.dart';

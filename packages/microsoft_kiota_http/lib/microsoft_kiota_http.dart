@@ -2,8 +2,6 @@
 /// [Kiota](https://github.com/microsoft/kiota) clients.
 library microsoft_kiota_http;
 
-import 'dart:typed_data';
-
 import 'package:http/http.dart' as http;
 import 'package:http/retry.dart' as retry;
 import 'package:microsoft_kiota_abstractions/microsoft_kiota_abstractions.dart';
