@@ -1,5 +1,14 @@
 # Unreleased
 
+## [0.0.6](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_serialization_json-v0.0.5...microsoft_kiota_serialization_json-v0.0.6) (2025-08-05)
+
+
+### Bug Fixes
+
+* export Uint8List so it can be used by properties with that type ([e578280](https://github.com/microsoft/kiota-dart/commit/e5782807ff41b93d5348251695b3f1783ef28489))
+* parse primitives based on their type ([b25f451](https://github.com/microsoft/kiota-dart/commit/b25f45116a40c98106111d76a3bbaf25a9594a14))
+* parse primitives based on their type ([3db4f32](https://github.com/microsoft/kiota-dart/commit/3db4f3218982cf71c8151985b41cb73497337416))
+
 ## [0.0.5](https://github.com/microsoft/kiota-dart/compare/microsoft_kiota_serialization_json-v0.0.4...microsoft_kiota_serialization_json-v0.0.5) (2025-03-07)
 
 
