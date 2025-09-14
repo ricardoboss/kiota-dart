@@ -125,6 +125,8 @@ extension RequestInformationExtensions on RequestInformation {
         writer.writeDoubleValue(null, d);
       case final DateTime t:
         writer.writeDateTimeValue(null, t);
+      case final Uint8List l:
+        writer.writeByteArrayValue(null, l);
       case null:
         writer.writeNullValue(null);
       default:
