@@ -11,3 +11,6 @@ dependencies:
     path: ../
   microsoft_kiota_bundle:
     path: ../../microsoft_kiota_bundle
+
+dev_dependencies:
+  lints: ^6.0.0
