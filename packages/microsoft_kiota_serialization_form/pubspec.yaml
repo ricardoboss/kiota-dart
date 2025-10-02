@@ -5,7 +5,7 @@ homepage: https://github.com/microsoft/kiota-dart/tree/main/packages/microsoft_k
 repository: https://github.com/microsoft/kiota-dart
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.9.0
 
 resolution: workspace
 

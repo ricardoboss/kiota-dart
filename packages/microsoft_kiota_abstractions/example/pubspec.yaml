@@ -1,7 +1,7 @@
 ﻿name: example
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.9.0
 
 dependencies:
   microsoft_kiota_abstractions:
