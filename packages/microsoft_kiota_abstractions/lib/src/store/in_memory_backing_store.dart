@@ -126,15 +126,12 @@ class InMemoryBackingStore implements BackingStore {
     if (_store.containsKey(key)) {
       oldValue = _store[key];
     } else if (value is BackedModel) {
-      value.backingStore?.subscribe(
-        (dataKey, previousValue, newValue) {
-          // all its properties are dirty as the model has been touched
-          value.backingStore!.initializationCompleted = false;
+      value.backingStore?.subscribe((dataKey, previousValue, newValue) {
+        // all its properties are dirty as the model has been touched
+        value.backingStore!.initializationCompleted = false;
 
-          set(key, value);
-        },
-        key,
-      );
+        set(key, value);
+      }, key);
     }
 
     _store[key] = valueToAdd;
@@ -142,12 +139,9 @@ class InMemoryBackingStore implements BackingStore {
     if (value is Iterable<Object?>) {
       value.whereType<BackedModel>().forEach((model) {
         model.backingStore?.initializationCompleted = false;
-        model.backingStore?.subscribe(
-          (dataKey, previousValue, newValue) {
-            set(key, value);
-          },
-          key,
-        );
+        model.backingStore?.subscribe((dataKey, previousValue, newValue) {
+          set(key, value);
+        }, key);
       });
     }
 

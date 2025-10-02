@@ -16,7 +16,8 @@ class ApiClientBuilder {
     final factory = factoryCreator();
 
     SerializationWriterFactoryRegistry
-        .defaultInstance.contentTypeAssociatedFactories
+        .defaultInstance
+        .contentTypeAssociatedFactories
         .putIfAbsent(factory.validContentType, () => factory);
   }
 
@@ -35,7 +36,7 @@ class ApiClientBuilder {
 
   /// Enables backing stores for [SerializationWriterFactory]s.
   static SerializationWriterFactory
-      enableBackingStoreForSerializationWriterFactory(
+  enableBackingStoreForSerializationWriterFactory(
     SerializationWriterFactory original,
   ) {
     var result = original;
@@ -97,8 +98,8 @@ class ApiClientBuilder {
     keysToUpdate.forEach((key) {
       registry.contentTypeAssociatedFactories[key] =
           BackingStoreParseNodeFactory(
-        concrete: registry.contentTypeAssociatedFactories[key]!,
-      );
+            concrete: registry.contentTypeAssociatedFactories[key]!,
+          );
     });
   }
 
@@ -115,8 +116,8 @@ class ApiClientBuilder {
     keysToUpdate.forEach((key) {
       registry.contentTypeAssociatedFactories[key] =
           BackingStoreSerializationWriterProxyFactory(
-        concrete: registry.contentTypeAssociatedFactories[key]!,
-      );
+            concrete: registry.contentTypeAssociatedFactories[key]!,
+          );
     });
   }
 }

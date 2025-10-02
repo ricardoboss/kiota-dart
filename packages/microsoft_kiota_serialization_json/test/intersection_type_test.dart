@@ -16,10 +16,13 @@ void main() {
       const initialString =
           '{"displayName":"McGill","officeLocation":"Montreal", "id": "opaque"}';
       final rawResponse = utf8.encode(initialString);
-      final parseNode = JsonParseNodeFactory()
-          .getRootParseNode('application/json', rawResponse);
-      final result = parseNode
-          .getObjectValue(IntersectionTypeMock.createFromDiscriminatorValue);
+      final parseNode = JsonParseNodeFactory().getRootParseNode(
+        'application/json',
+        rawResponse,
+      );
+      final result = parseNode.getObjectValue(
+        IntersectionTypeMock.createFromDiscriminatorValue,
+      );
       expect(result, isNotNull);
       if (result != null) {
         expect(result.composedType1, isNotNull);
@@ -35,10 +38,13 @@ void main() {
       const initialString =
           '{"displayName":"McGill","officeLocation":"Montreal", "id": 10}';
       final rawResponse = utf8.encode(initialString);
-      final parseNode = JsonParseNodeFactory()
-          .getRootParseNode('application/json', rawResponse);
-      final result = parseNode
-          .getObjectValue(IntersectionTypeMock.createFromDiscriminatorValue);
+      final parseNode = JsonParseNodeFactory().getRootParseNode(
+        'application/json',
+        rawResponse,
+      );
+      final result = parseNode.getObjectValue(
+        IntersectionTypeMock.createFromDiscriminatorValue,
+      );
       expect(result, isNotNull);
       if (result != null) {
         expect(result.composedType1, isNotNull);
@@ -53,10 +59,13 @@ void main() {
       const initialString =
           '[{"@odata.type":"#microsoft.graph.TestEntity","officeLocation":"Ottawa", "id": "11"}, {"@odata.type":"#microsoft.graph.TestEntity","officeLocation":"Montreal", "id": "10"}]';
       final rawResponse = utf8.encode(initialString);
-      final parseNode = JsonParseNodeFactory()
-          .getRootParseNode('application/json', rawResponse);
-      final result = parseNode
-          .getObjectValue(IntersectionTypeMock.createFromDiscriminatorValue);
+      final parseNode = JsonParseNodeFactory().getRootParseNode(
+        'application/json',
+        rawResponse,
+      );
+      final result = parseNode.getObjectValue(
+        IntersectionTypeMock.createFromDiscriminatorValue,
+      );
       expect(result, isNotNull);
       if (result != null) {
         expect(result.composedType1, isNull);
@@ -70,10 +79,13 @@ void main() {
     test('ParsesIntersectionTypeStringValue', () {
       const initialString = '"officeLocation"';
       final rawResponse = utf8.encode(initialString);
-      final parseNode = JsonParseNodeFactory()
-          .getRootParseNode('application/json', rawResponse);
-      final result = parseNode
-          .getObjectValue(IntersectionTypeMock.createFromDiscriminatorValue);
+      final parseNode = JsonParseNodeFactory().getRootParseNode(
+        'application/json',
+        rawResponse,
+      );
+      final result = parseNode.getObjectValue(
+        IntersectionTypeMock.createFromDiscriminatorValue,
+      );
       expect(result, isNotNull);
       if (result != null) {
         expect(result.composedType1, isNull);

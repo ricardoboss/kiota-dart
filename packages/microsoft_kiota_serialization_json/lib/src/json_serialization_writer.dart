@@ -146,9 +146,10 @@ class JsonSerializationWriter implements SerializationWriter {
     Iterable<Parsable?>? additionalValuesToMerge,
   ]) {
     // Only consider non-null values
-    final filteredAdditionalValuesToMerge = additionalValuesToMerge
-            ?.whereType<Parsable>()
-            .toList(growable: false) ??
+    final filteredAdditionalValuesToMerge =
+        additionalValuesToMerge?.whereType<Parsable>().toList(
+          growable: false,
+        ) ??
         [];
 
     if (value == null && filteredAdditionalValuesToMerge.isEmpty) {

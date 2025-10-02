@@ -112,21 +112,17 @@ class JsonParseNode implements ParseNode {
           'TimeOnly',
         );
       } else if (_isA<T, Duration>()) {
-        return _convertPrimitive(
-          items,
-          (i) {
-            final dur = DurationExtensions.tryParse(i);
-            if (dur == null) {
-              throw JsonParseException(
-                message: 'Failed to parse duration: $i',
-                node: this,
-              );
-            }
+        return _convertPrimitive(items, (i) {
+          final dur = DurationExtensions.tryParse(i);
+          if (dur == null) {
+            throw JsonParseException(
+              message: 'Failed to parse duration: $i',
+              node: this,
+            );
+          }
 
-            return dur as T;
-          },
-          'Duration',
-        );
+          return dur as T;
+        }, 'Duration');
       } else if (_isA<T, UuidValue>()) {
         return _convertPrimitive(
           items,

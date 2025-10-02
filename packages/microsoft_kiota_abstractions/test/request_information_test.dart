@@ -42,9 +42,8 @@ void main() {
 
     test('Adds and removes request options', () {
       // Arrange
-      final testRequest = RequestInformation(
-        httpMethod: HttpMethod.get,
-      )..uri = Uri.parse('http://localhost');
+      final testRequest = RequestInformation(httpMethod: HttpMethod.get)
+        ..uri = Uri.parse('http://localhost');
 
       final testRequestOption = MockRequestOption();
       expect(testRequest.requestOptions.isEmpty, isTrue);
@@ -165,13 +164,15 @@ void main() {
           'https://proxy.apisandbox.msdn.microsoft.com/svc?url=https://graph.microsoft.com/beta';
 
       // Arrange as the request builders would
-      final requestInfo = RequestInformation(
-        httpMethod: HttpMethod.get,
-        urlTemplate: '{+baseurl}/users{?%24count}',
-      )..pathParameters = <String, Object>{
-          'baseurl': proxyUrl,
-          '%24count': true,
-        };
+      final requestInfo =
+          RequestInformation(
+              httpMethod: HttpMethod.get,
+              urlTemplate: '{+baseurl}/users{?%24count}',
+            )
+            ..pathParameters = <String, Object>{
+              'baseurl': proxyUrl,
+              '%24count': true,
+            };
 
       // Assert we can build URLs based on a proxy-based base URL
       expect(

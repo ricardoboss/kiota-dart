@@ -1,4 +1,4 @@
-﻿part of '../microsoft_kiota_oauth.dart';
+part of '../microsoft_kiota_oauth.dart';
 
 /// An authentication provider that uses an [OAuthAccessTokenProvider] to
 /// obtain authorization tokens for requests.
@@ -19,10 +19,7 @@ class OAuthAuthenticationProvider extends BaseBearerTokenAuthenticationProvider
     List<String>? allowedHosts,
   }) {
     return OAuthAuthenticationProvider(
-      OAuthAccessTokenProvider(
-        client: client,
-        allowedHosts: allowedHosts,
-      ),
+      OAuthAccessTokenProvider(client: client, allowedHosts: allowedHosts),
     );
   }
 }

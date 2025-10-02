@@ -13,11 +13,11 @@ void main() {
   group('JsonSerializationWriter', () {
     test('writeCollectionOfEnumValues', () {
       final writer = JsonSerializationWriter()
-        ..writeCollectionOfEnumValues(
-          'key',
-          [HttpMethod.get, HttpMethod.post, HttpMethod.patch],
-          _httpMethodEnumSerializer,
-        );
+        ..writeCollectionOfEnumValues('key', [
+          HttpMethod.get,
+          HttpMethod.post,
+          HttpMethod.patch,
+        ], _httpMethodEnumSerializer);
 
       expect(
         utf8.decode(writer.getSerializedContent()),
@@ -26,10 +26,7 @@ void main() {
     });
     test('writeCollectionOfPrimitiveValues', () {
       final writer = JsonSerializationWriter()
-        ..writeCollectionOfPrimitiveValues(
-          'intlist',
-          [1, 2, 3],
-        );
+        ..writeCollectionOfPrimitiveValues('intlist', [1, 2, 3]);
 
       expect(
         utf8.decode(writer.getSerializedContent()),
@@ -44,8 +41,9 @@ void main() {
         ..createdDateTime = DateTime(2023, 12, 1, 15, 15)
         ..officeLocation = 'at the desk'
         ..workDuration = const Duration(hours: 40)
-        ..birthDay =
-            DateOnly.fromDateTime(DateTime.parse('2024-10-01 00:00:00'))
+        ..birthDay = DateOnly.fromDateTime(
+          DateTime.parse('2024-10-01 00:00:00'),
+        )
         ..heightInMetres = 1.7
         ..startWorkTime = TimeOnly.fromDateTimeString('06:00')
         ..active = true
@@ -56,16 +54,14 @@ void main() {
           'c': false,
           'someNull': const UntypedNull(),
           'untypedArray': const UntypedArray(untypedNodesList),
-          'object': const UntypedObject(
-            {'name': UntypedString('a name'), 'age': UntypedInteger(8)},
-          ),
+          'object': const UntypedObject({
+            'name': UntypedString('a name'),
+            'age': UntypedInteger(8),
+          }),
         };
 
       final writer = JsonSerializationWriter()
-        ..writeObjectValue(
-          null,
-          simpleUser,
-        );
+        ..writeObjectValue(null, simpleUser);
 
       expect(
         utf8.decode(writer.getSerializedContent()),
@@ -91,11 +87,7 @@ void main() {
         ..leader = user3
         ..members = [user1, user2];
 
-      final writer = JsonSerializationWriter()
-        ..writeObjectValue(
-          null,
-          group,
-        );
+      final writer = JsonSerializationWriter()..writeObjectValue(null, group);
 
       expect(
         utf8.decode(writer.getSerializedContent()),
@@ -124,11 +116,7 @@ void main() {
           'user': user2,
         };
 
-      final writer = JsonSerializationWriter()
-        ..writeObjectValue(
-          null,
-          user,
-        );
+      final writer = JsonSerializationWriter()..writeObjectValue(null, user);
 
       expect(
         utf8.decode(writer.getSerializedContent()),

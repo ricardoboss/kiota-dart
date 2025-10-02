@@ -9,12 +9,11 @@ class HttpClientRequestAdapter implements RequestAdapter {
     ParseNodeFactory? pNodeFactory,
     SerializationWriterFactory? sWriterFactory,
     http.Client? client,
-  })  : _authProvider = authProvider,
-        _pNodeFactory =
-            pNodeFactory ?? ParseNodeFactoryRegistry.defaultInstance,
-        _sWriterFactory = sWriterFactory ??
-            SerializationWriterFactoryRegistry.defaultInstance,
-        _client = client ?? KiotaClientFactory.createClient();
+  }) : _authProvider = authProvider,
+       _pNodeFactory = pNodeFactory ?? ParseNodeFactoryRegistry.defaultInstance,
+       _sWriterFactory =
+           sWriterFactory ?? SerializationWriterFactoryRegistry.defaultInstance,
+       _client = client ?? KiotaClientFactory.createClient();
 
   static const String _claimsKey = 'claims';
 
@@ -41,9 +40,7 @@ class HttpClientRequestAdapter implements RequestAdapter {
     }
   }
 
-  http.BaseRequest _getMessageFromInfo(
-    RequestInformation requestInfo,
-  ) {
+  http.BaseRequest _getMessageFromInfo(RequestInformation requestInfo) {
     final request = http.Request(
       requestInfo.httpMethod!.value,
       requestInfo.uri,
@@ -210,8 +207,10 @@ class HttpClientRequestAdapter implements RequestAdapter {
     ParsableFactory<ModelType> factory, [
     ErrorMappings? errorMapping,
   ]) async {
-    final rootNode =
-        await _sendRequestAndHandleResponse(requestInfo, errorMapping);
+    final rootNode = await _sendRequestAndHandleResponse(
+      requestInfo,
+      errorMapping,
+    );
 
     return rootNode?.getObjectValue<ModelType>(factory);
   }
@@ -222,8 +221,10 @@ class HttpClientRequestAdapter implements RequestAdapter {
     ParsableFactory<ModelType> factory, [
     ErrorMappings? errorMapping,
   ]) async {
-    final rootNode =
-        await _sendRequestAndHandleResponse(requestInfo, errorMapping);
+    final rootNode = await _sendRequestAndHandleResponse(
+      requestInfo,
+      errorMapping,
+    );
 
     return rootNode?.getCollectionOfObjectValues<ModelType>(factory);
   }
@@ -258,8 +259,10 @@ class HttpClientRequestAdapter implements RequestAdapter {
     RequestInformation requestInfo, [
     ErrorMappings? errorMapping,
   ]) async {
-    final rootNode =
-        await _sendRequestAndHandleResponse(requestInfo, errorMapping);
+    final rootNode = await _sendRequestAndHandleResponse(
+      requestInfo,
+      errorMapping,
+    );
 
     if (rootNode == null) {
       return null;
@@ -295,8 +298,10 @@ class HttpClientRequestAdapter implements RequestAdapter {
     RequestInformation requestInfo, [
     ErrorMappings? errorMapping,
   ]) async {
-    final rootNode =
-        await _sendRequestAndHandleResponse(requestInfo, errorMapping);
+    final rootNode = await _sendRequestAndHandleResponse(
+      requestInfo,
+      errorMapping,
+    );
 
     return rootNode?.getCollectionOfPrimitiveValues<ModelType>();
   }
@@ -306,12 +311,13 @@ class HttpClientRequestAdapter implements RequestAdapter {
 
   @override
   void enableBackingStore(BackingStoreFactory backingStoreFactory) {
-    _pNodeFactory =
-        ApiClientBuilder.enableBackingStoreForParseNodeFactory(_pNodeFactory);
+    _pNodeFactory = ApiClientBuilder.enableBackingStoreForParseNodeFactory(
+      _pNodeFactory,
+    );
     _sWriterFactory =
         ApiClientBuilder.enableBackingStoreForSerializationWriterFactory(
-      _sWriterFactory,
-    );
+          _sWriterFactory,
+        );
     BackingStoreFactorySingleton.instance = backingStoreFactory;
   }
 }

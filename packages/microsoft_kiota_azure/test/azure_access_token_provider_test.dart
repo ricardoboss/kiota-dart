@@ -31,9 +31,8 @@ void main() async {
     );
 
     expect(
-      () async => provider.getAuthorizationToken(
-        Uri.parse('http://example.com/me'),
-      ),
+      () async =>
+          provider.getAuthorizationToken(Uri.parse('http://example.com/me')),
       throwsArgumentError,
     );
   });

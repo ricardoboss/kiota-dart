@@ -32,9 +32,8 @@ void main() async {
     );
 
     expect(
-      () async => provider.getAuthorizationToken(
-        Uri.parse('http://example.com/me'),
-      ),
+      () async =>
+          provider.getAuthorizationToken(Uri.parse('http://example.com/me')),
       throwsArgumentError,
     );
   });
@@ -76,17 +75,13 @@ void main() async {
   test('refreshes credentials if expired', () async {
     final client = MockClient();
 
-    when(client.credentials).thenReturnInOrder(
-      [
-        oauth2.Credentials(
-          'expired',
-          expiration: DateTime.now().subtract(
-            const Duration(minutes: 1),
-          ),
-        ),
-        oauth2.Credentials('refreshed'),
-      ],
-    );
+    when(client.credentials).thenReturnInOrder([
+      oauth2.Credentials(
+        'expired',
+        expiration: DateTime.now().subtract(const Duration(minutes: 1)),
+      ),
+      oauth2.Credentials('refreshed'),
+    ]);
 
     when(client.refreshCredentials()).thenAnswer((_) async => client);
 

@@ -25,7 +25,8 @@ void main() {
     // Assume no factories are registered prior to calling the constructor
     expect(
       SerializationWriterFactoryRegistry
-          .defaultInstance.contentTypeAssociatedFactories,
+          .defaultInstance
+          .contentTypeAssociatedFactories,
       isEmpty,
     );
 
@@ -43,20 +44,15 @@ void main() {
     );
 
     final serializers = SerializationWriterFactoryRegistry
-        .defaultInstance.contentTypeAssociatedFactories;
+        .defaultInstance
+        .contentTypeAssociatedFactories;
     expect(
       serializers,
-      containsPair(
-        'application/json',
-        isA<JsonSerializationWriterFactory>(),
-      ),
+      containsPair('application/json', isA<JsonSerializationWriterFactory>()),
     );
     expect(
       serializers,
-      containsPair(
-        'text/plain',
-        isA<TextSerializationWriterFactory>(),
-      ),
+      containsPair('text/plain', isA<TextSerializationWriterFactory>()),
     );
     expect(
       serializers,
@@ -77,17 +73,11 @@ void main() {
         ParseNodeFactoryRegistry.defaultInstance.contentTypeAssociatedFactories;
     expect(
       deserializers,
-      containsPair(
-        'application/json',
-        isA<JsonParseNodeFactory>(),
-      ),
+      containsPair('application/json', isA<JsonParseNodeFactory>()),
     );
     expect(
       deserializers,
-      containsPair(
-        'text/plain',
-        isA<TextParseNodeFactory>(),
-      ),
+      containsPair('text/plain', isA<TextParseNodeFactory>()),
     );
     expect(
       deserializers,

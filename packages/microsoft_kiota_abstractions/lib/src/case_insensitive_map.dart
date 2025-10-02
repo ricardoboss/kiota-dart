@@ -94,9 +94,7 @@ class CaseInsensitiveMap<K extends String, V> implements Map<K, V> {
   int get length => _contents.length;
 
   @override
-  Map<K2, V2> map<K2, V2>(
-    MapEntry<K2, V2> Function(K key, V value) convert,
-  ) {
+  Map<K2, V2> map<K2, V2>(MapEntry<K2, V2> Function(K key, V value) convert) {
     final result = <K2, V2>{};
 
     _contents.forEach((key, value) {
@@ -141,11 +139,7 @@ class CaseInsensitiveMap<K extends String, V> implements Map<K, V> {
   }
 
   @override
-  V update(
-    K key,
-    V Function(V value) update, {
-    V Function()? ifAbsent,
-  }) {
+  V update(K key, V Function(V value) update, {V Function()? ifAbsent}) {
     return _contents.update(normalizeKey(key), update, ifAbsent: ifAbsent);
   }
 

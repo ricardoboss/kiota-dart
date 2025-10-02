@@ -105,9 +105,7 @@ void main() {
         apiKey: 'apiKey',
         parameterName: 'parameterName',
         keyLocation: ApiKeyLocation.queryParameter,
-        allowedHosts: [
-          'valid.test',
-        ],
+        allowedHosts: ['valid.test'],
       );
 
       final request = RequestInformation(
@@ -124,9 +122,7 @@ void main() {
         apiKey: 'apiKey',
         parameterName: 'parameterName',
         keyLocation: ApiKeyLocation.queryParameter,
-        allowedHosts: [
-          'valid.test',
-        ],
+        allowedHosts: ['valid.test'],
       );
 
       final request = RequestInformation(
@@ -152,10 +148,7 @@ void main() {
         urlTemplate: 'http://example.test/resource',
       );
 
-      expect(
-        () => provider.authenticateRequest(request),
-        throwsArgumentError,
-      );
+      expect(() => provider.authenticateRequest(request), throwsArgumentError);
     });
   });
 }

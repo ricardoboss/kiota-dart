@@ -35,14 +35,8 @@ void main() {
       final entries = store.iterate().toList();
 
       expect(entries, hasLength(2));
-      expect(
-        entries.map((e) => e.key),
-        containsAll(['key', 'key2']),
-      );
-      expect(
-        entries.map((e) => e.value),
-        containsAll(['value', 'value2']),
-      );
+      expect(entries.map((e) => e.key), containsAll(['key', 'key2']));
+      expect(entries.map((e) => e.value), containsAll(['value', 'value2']));
     });
 
     test('iterates over all values that have changed to null', () {
@@ -51,8 +45,9 @@ void main() {
         ..set('email', 'peterpan@neverland.com')
         ..set('phone', null);
 
-      final changedToNullEntries =
-          store.iterateKeysForValuesChangedToNull().toList();
+      final changedToNullEntries = store
+          .iterateKeysForValuesChangedToNull()
+          .toList();
       final entries = store.iterate().toList();
 
       expect(entries, hasLength(3));

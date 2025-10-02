@@ -117,8 +117,9 @@ void main() {
   group('JsonParseNode', () {
     test('Get user object from Json', () {
       final jsonParseNode = JsonParseNode(jsonDecode(_testUserJson));
-      final testEntity = jsonParseNode
-          .getObjectValue(MicrosoftGraphUser.createFromDiscriminator);
+      final testEntity = jsonParseNode.getObjectValue(
+        MicrosoftGraphUser.createFromDiscriminator,
+      );
 
       expect(testEntity, isNotNull);
       if (testEntity != null) {
@@ -140,8 +141,9 @@ void main() {
 
     test('Get object derived from user', () {
       final jsonParseNode = JsonParseNode(jsonDecode(_testStudentJson));
-      final testEntity = jsonParseNode
-          .getObjectValue(MicrosoftGraphUser.createFromDiscriminator);
+      final testEntity = jsonParseNode.getObjectValue(
+        MicrosoftGraphUser.createFromDiscriminator,
+      );
       expect(testEntity, isNotNull);
       if (testEntity is DerivedMicrosoftGraphUser) {
         expect(testEntity.enrolmentDate, DateOnly.fromComponents(2017, 9, 4));
@@ -155,8 +157,9 @@ void main() {
 
     test('Get user object from untyped Json', () {
       final jsonParseNode = JsonParseNode(jsonDecode(_testUntypedJson));
-      final testEntity = jsonParseNode
-          .getObjectValue(UntypedTestEntity.createFromDiscriminator);
+      final testEntity = jsonParseNode.getObjectValue(
+        UntypedTestEntity.createFromDiscriminator,
+      );
 
       expect(testEntity, isNotNull);
       if (testEntity != null) {
@@ -168,8 +171,9 @@ void main() {
       }
     });
     test('Get enumcollection from json', () {
-      final jsonParseNode =
-          JsonParseNode(jsonDecode(_testCollectionOfEnumsJson));
+      final jsonParseNode = JsonParseNode(
+        jsonDecode(_testCollectionOfEnumsJson),
+      );
       final testCollection = jsonParseNode.getCollectionOfEnumValues(
         (value) =>
             NamingEnum.values.where((ne) => ne.value == value).firstOrNull,
@@ -183,8 +187,8 @@ void main() {
 
     test('Get collection of int (primitive) values from json', () {
       final jsonParseNode = JsonParseNode(jsonDecode('[2,3,5]'));
-      final testCollection =
-          jsonParseNode.getCollectionOfPrimitiveValues<int>();
+      final testCollection = jsonParseNode
+          .getCollectionOfPrimitiveValues<int>();
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 3);
@@ -193,10 +197,11 @@ void main() {
     });
 
     test('Get collection of DateTime (primitive) values from json', () {
-      final jsonParseNode =
-          JsonParseNode(jsonDecode('["2025-07-30T23:39:48.101Z"]'));
-      final testCollection =
-          jsonParseNode.getCollectionOfPrimitiveValues<DateTime>();
+      final jsonParseNode = JsonParseNode(
+        jsonDecode('["2025-07-30T23:39:48.101Z"]'),
+      );
+      final testCollection = jsonParseNode
+          .getCollectionOfPrimitiveValues<DateTime>();
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 1);
@@ -205,8 +210,8 @@ void main() {
 
     test('Get collection of DateOnly (primitive) values from json', () {
       final jsonParseNode = JsonParseNode(jsonDecode('["2025-07-30"]'));
-      final testCollection =
-          jsonParseNode.getCollectionOfPrimitiveValues<DateOnly>();
+      final testCollection = jsonParseNode
+          .getCollectionOfPrimitiveValues<DateOnly>();
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 1);
@@ -215,8 +220,8 @@ void main() {
 
     test('Get collection of TimeOnly (primitive) values from json', () {
       final jsonParseNode = JsonParseNode(jsonDecode('["23:39:48.101"]'));
-      final testCollection =
-          jsonParseNode.getCollectionOfPrimitiveValues<TimeOnly>();
+      final testCollection = jsonParseNode
+          .getCollectionOfPrimitiveValues<TimeOnly>();
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 1);
@@ -225,8 +230,8 @@ void main() {
 
     test('Get collection of Duration (primitive) values from json', () {
       final jsonParseNode = JsonParseNode(jsonDecode('["P4DT12H30M5S"]'));
-      final testCollection =
-          jsonParseNode.getCollectionOfPrimitiveValues<Duration>();
+      final testCollection = jsonParseNode
+          .getCollectionOfPrimitiveValues<Duration>();
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 1);
@@ -237,10 +242,11 @@ void main() {
     });
 
     test('Get collection of UUID (primitive) values from json', () {
-      final jsonParseNode =
-          JsonParseNode(jsonDecode('["6361d96a-8a4e-4bf5-b3b6-c00a0ea3fa28"]'));
-      final testCollection =
-          jsonParseNode.getCollectionOfPrimitiveValues<UuidValue>();
+      final jsonParseNode = JsonParseNode(
+        jsonDecode('["6361d96a-8a4e-4bf5-b3b6-c00a0ea3fa28"]'),
+      );
+      final testCollection = jsonParseNode
+          .getCollectionOfPrimitiveValues<UuidValue>();
 
       expect(testCollection, isNotNull);
       expect(testCollection.length, 1);
@@ -267,60 +273,63 @@ void main() {
       );
     });
 
-    test('Get collection of primitive values fails for mixed types (simple)',
-        () {
-      final jsonParseNode = JsonParseNode(jsonDecode('[0, 1, 2, "foo"]'));
+    test(
+      'Get collection of primitive values fails for mixed types (simple)',
+      () {
+        final jsonParseNode = JsonParseNode(jsonDecode('[0, 1, 2, "foo"]'));
 
-      expect(
-        () => jsonParseNode.getCollectionOfPrimitiveValues<int>(),
-        throwsA(
-          isA<JsonParseException>().having(
-            (e) => e.message,
-            'message',
-            equals(
-              'Not every element in the collection of primitives is a int',
+        expect(
+          () => jsonParseNode.getCollectionOfPrimitiveValues<int>(),
+          throwsA(
+            isA<JsonParseException>().having(
+              (e) => e.message,
+              'message',
+              equals(
+                'Not every element in the collection of primitives is a int',
+              ),
             ),
           ),
-        ),
-      );
-    });
-
-    test('Get collection of primitive values fails for mixed types (complex)',
-        () {
-      final jsonParseNode = JsonParseNode(jsonDecode('["foo", 0]'));
-
-      expect(
-        () => jsonParseNode.getCollectionOfPrimitiveValues<DateTime>(),
-        throwsA(
-          isA<JsonParseException>().having(
-            (e) => e.message,
-            'message',
-            equals(
-              'Not every element in the collection of primitives is a String and thus cannot be converted to a DateTime',
-            ),
-          ),
-        ),
-      );
-    });
+        );
+      },
+    );
 
     test(
-        'Get collection of primitive values throws for invalid values (DateTime)',
-        () {
-      final jsonParseNode = JsonParseNode(jsonDecode('["foo"]'));
+      'Get collection of primitive values fails for mixed types (complex)',
+      () {
+        final jsonParseNode = JsonParseNode(jsonDecode('["foo", 0]'));
 
-      expect(
-        () => jsonParseNode.getCollectionOfPrimitiveValues<DateTime>(),
-        throwsA(
-          isA<FormatException>().having(
-            (e) => e.message,
-            'message',
-            equals(
-              'Invalid date format',
+        expect(
+          () => jsonParseNode.getCollectionOfPrimitiveValues<DateTime>(),
+          throwsA(
+            isA<JsonParseException>().having(
+              (e) => e.message,
+              'message',
+              equals(
+                'Not every element in the collection of primitives is a String and thus cannot be converted to a DateTime',
+              ),
             ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
+
+    test(
+      'Get collection of primitive values throws for invalid values (DateTime)',
+      () {
+        final jsonParseNode = JsonParseNode(jsonDecode('["foo"]'));
+
+        expect(
+          () => jsonParseNode.getCollectionOfPrimitiveValues<DateTime>(),
+          throwsA(
+            isA<FormatException>().having(
+              (e) => e.message,
+              'message',
+              equals('Invalid date format'),
+            ),
+          ),
+        );
+      },
+    );
 
     test('getBoolValue', () {
       final jsonParseNode = JsonParseNode(jsonDecode('true'));

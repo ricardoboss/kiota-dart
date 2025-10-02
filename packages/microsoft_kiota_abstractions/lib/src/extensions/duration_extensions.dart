@@ -32,21 +32,25 @@ extension DurationExtensions on Duration {
 
     final totalMicroseconds =
         (fractionalYears * 365 * Duration.microsecondsPerDay).round() +
-            (fractionalMonths * 30 * Duration.microsecondsPerDay).round() +
-            (fractionalWeeks * 7 * Duration.microsecondsPerDay).round() +
-            (fractionalDays * Duration.microsecondsPerDay).round() +
-            (fractionalHours * Duration.microsecondsPerHour).round() +
-            (fractionalMinutes * Duration.microsecondsPerMinute).round() +
-            (fractionalSeconds * Duration.microsecondsPerSecond).round();
+        (fractionalMonths * 30 * Duration.microsecondsPerDay).round() +
+        (fractionalWeeks * 7 * Duration.microsecondsPerDay).round() +
+        (fractionalDays * Duration.microsecondsPerDay).round() +
+        (fractionalHours * Duration.microsecondsPerHour).round() +
+        (fractionalMinutes * Duration.microsecondsPerMinute).round() +
+        (fractionalSeconds * Duration.microsecondsPerSecond).round();
 
     final days = totalMicroseconds ~/ Duration.microsecondsPerDay;
-    final hours = (totalMicroseconds % Duration.microsecondsPerDay) ~/
+    final hours =
+        (totalMicroseconds % Duration.microsecondsPerDay) ~/
         Duration.microsecondsPerHour;
-    final minutes = (totalMicroseconds % Duration.microsecondsPerHour) ~/
+    final minutes =
+        (totalMicroseconds % Duration.microsecondsPerHour) ~/
         Duration.microsecondsPerMinute;
-    final seconds = (totalMicroseconds % Duration.microsecondsPerMinute) ~/
+    final seconds =
+        (totalMicroseconds % Duration.microsecondsPerMinute) ~/
         Duration.microsecondsPerSecond;
-    final milliseconds = (totalMicroseconds % Duration.microsecondsPerSecond) ~/
+    final milliseconds =
+        (totalMicroseconds % Duration.microsecondsPerSecond) ~/
         Duration.microsecondsPerMillisecond;
     final microseconds =
         totalMicroseconds % Duration.microsecondsPerMillisecond;

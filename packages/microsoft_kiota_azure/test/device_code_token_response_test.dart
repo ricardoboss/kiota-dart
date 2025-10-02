@@ -18,8 +18,9 @@ void main() async {
     if (jsonPayload is! Map<String, dynamic>) {
       throw Exception('Invalid JSON payload');
     }
-    final deviceCodeTokenResponse =
-        DeviceCodeTokenResponse.fromJson(jsonPayload);
+    final deviceCodeTokenResponse = DeviceCodeTokenResponse.fromJson(
+      jsonPayload,
+    );
     expect(
       deviceCodeTokenResponse.accessToken,
       'eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6Ik5HVEZ2ZEstZnl0aEV1Q...',

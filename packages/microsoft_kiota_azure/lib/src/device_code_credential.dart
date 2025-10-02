@@ -108,8 +108,9 @@ class DeviceCodeCredential implements TokenCredential {
     } while (tokenResponse == null);
     return AccessToken(
       token: tokenResponse.accessToken,
-      expiresOn:
-          DateTime.now().add(Duration(seconds: tokenResponse.expiresIn ?? 60)),
+      expiresOn: DateTime.now().add(
+        Duration(seconds: tokenResponse.expiresIn ?? 60),
+      ),
     );
     // TODO(baywet): store the refresh token.
   }

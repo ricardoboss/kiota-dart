@@ -40,8 +40,9 @@ void main() {
       final binaryData = Uint8List.fromList([0x01, 0x02, 0x03]);
 
       final requestAdapter = MockRequestAdapter();
-      when(requestAdapter.serializationWriterFactory)
-          .thenReturn(JsonSerializationWriterFactory());
+      when(
+        requestAdapter.serializationWriterFactory,
+      ).thenReturn(JsonSerializationWriterFactory());
 
       final testEntity = TestEntity()
         ..id = '48e31887-5dad-4d73-a9f5-3c356e68a038'
@@ -65,10 +66,12 @@ void main() {
 
       final serializationWriter = MultipartSerializationWriter()
         ..writeObjectValue(null, multipartBody);
-      final stringContent =
-          String.fromCharCodes(serializationWriter.getSerializedContent());
+      final stringContent = String.fromCharCodes(
+        serializationWriter.getSerializedContent(),
+      );
 
-      final expected = '''
+      final expected =
+          '''
 --${multipartBody.boundary}\r
 Content-Type: application/json\r
 Content-Disposition: form-data; name="testEntity"\r

@@ -5,12 +5,12 @@ homepage: https://github.com/microsoft/kiota-dart/tree/main/packages/microsoft_k
 repository: https://github.com/microsoft/kiota-dart
 
 environment:
-  sdk: ^3.6.0
+  sdk: ^3.9.0
 
 resolution: workspace
 
 dependencies:
-  microsoft_kiota_abstractions: ^0.0.1
+  microsoft_kiota_abstractions: ">=0.0.1 <0.9.0"
   uuid: ^4.5.1
 
 dev_dependencies:

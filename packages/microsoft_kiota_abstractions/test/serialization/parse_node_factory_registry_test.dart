@@ -14,8 +14,9 @@ void main() {
       final mockFactory = MockParseNodeFactory();
       final jsonStream = utf8.encode('{"test": "input"}');
       final mockParseNode = MockParseNode();
-      when(mockFactory.getRootParseNode(contentType, jsonStream))
-          .thenReturn(mockParseNode);
+      when(
+        mockFactory.getRootParseNode(contentType, jsonStream),
+      ).thenReturn(mockParseNode);
       ParseNodeFactoryRegistry.defaultInstance.contentTypeAssociatedFactories
           .putIfAbsent(contentType, () => mockFactory);
       final rootParseNode = ParseNodeFactoryRegistry.defaultInstance

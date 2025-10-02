@@ -27,16 +27,8 @@ abstract class DateOnly implements Comparable<DateOnly> {
   }
 
   /// Creates an object implementing [DateOnly] from the provided components.
-  factory DateOnly.fromComponents(
-    int year, [
-    int month = 1,
-    int day = 1,
-  ]) {
-    return _DateOnlyImpl(
-      day: day,
-      month: month,
-      year: year,
-    );
+  factory DateOnly.fromComponents(int year, [int month = 1, int day = 1]) {
+    return _DateOnlyImpl(day: day, month: month, year: year);
   }
 
   /// Gets the year of the date.

@@ -6,12 +6,11 @@ import './second_test_entity.dart';
 class UnionTypeMock extends Parsable implements AdditionalDataHolder {
   UnionTypeMock();
 
-  factory UnionTypeMock.createFromDiscriminatorValue(
-    ParseNode parseNode,
-  ) {
+  factory UnionTypeMock.createFromDiscriminatorValue(ParseNode parseNode) {
     final result = UnionTypeMock();
-    final discriminator =
-        parseNode.getChildNode('@odata.type')?.getStringValue();
+    final discriminator = parseNode
+        .getChildNode('@odata.type')
+        ?.getStringValue();
     if ('#microsoft.graph.testEntity' == discriminator) {
       result.composedType1 = MicrosoftGraphUser();
     } else if ('#microsoft.graph.secondTestEntity' == discriminator) {
@@ -23,10 +22,10 @@ class UnionTypeMock extends Parsable implements AdditionalDataHolder {
           MicrosoftGraphUser.createFromDiscriminator,
         )
         .isNotEmpty) {
-      result.composedType3 =
-          parseNode.getCollectionOfObjectValues<MicrosoftGraphUser>(
-        MicrosoftGraphUser.createFromDiscriminator,
-      );
+      result.composedType3 = parseNode
+          .getCollectionOfObjectValues<MicrosoftGraphUser>(
+            MicrosoftGraphUser.createFromDiscriminator,
+          );
     }
     return result;
   }

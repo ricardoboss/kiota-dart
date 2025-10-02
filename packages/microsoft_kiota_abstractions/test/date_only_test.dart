@@ -24,10 +24,7 @@ void main() {
 
     test('fromDateTime', () {
       final dateTime = DateTime(2024, 2, 3, 12, 34, 56);
-      expect(
-        DateOnly.fromDateTime(dateTime).toRfc3339String(),
-        '2024-02-03',
-      );
+      expect(DateOnly.fromDateTime(dateTime).toRfc3339String(), '2024-02-03');
     });
 
     test('fromComponents', () {

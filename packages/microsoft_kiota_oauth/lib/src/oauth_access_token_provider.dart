@@ -1,4 +1,4 @@
-﻿part of '../microsoft_kiota_oauth.dart';
+part of '../microsoft_kiota_oauth.dart';
 
 /// Implements the [AccessTokenProvider] using the given [oauth2.Client] and
 /// allowed hosts.
@@ -15,10 +15,7 @@ class OAuthAccessTokenProvider implements AccessTokenProvider {
   ///
   /// Internally creates a new [AllowedHostsValidator] from the list, which is
   /// then used to validate if a token for any given request should be returned.
-  OAuthAccessTokenProvider({
-    required this.client,
-    List<String>? allowedHosts,
-  }) {
+  OAuthAccessTokenProvider({required this.client, List<String>? allowedHosts}) {
     allowedHostsValidator = AllowedHostsValidator(allowedHosts);
   }
 

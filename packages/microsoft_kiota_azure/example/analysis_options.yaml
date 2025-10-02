@@ -24,7 +24,7 @@ include: package:lints/recommended.yaml
 #     - path/to/excluded/files/**
 
 # For more information about the core and recommended set of lints, see
-# https://dart.dev/go/core-lints
+# https://github.com/dart-lang/core/tree/main/pkgs/lints
 
 # For additional information about configuring this file, see
 # https://dart.dev/guides/language/analysis-options

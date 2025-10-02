@@ -1,4 +1,4 @@
-﻿// ignore_for_file: unused_local_variable, avoid_print
+// ignore_for_file: unused_local_variable, avoid_print
 
 import 'package:microsoft_kiota_abstractions/microsoft_kiota_abstractions.dart';
 
@@ -59,9 +59,7 @@ Future<void> main() async {
 
   final request = RequestInformation(
     httpMethod: HttpMethod.get,
-    pathParameters: {
-      'id': 123,
-    },
+    pathParameters: {'id': 123},
     urlTemplate: 'https://example.com/{id}/foo',
   );
 

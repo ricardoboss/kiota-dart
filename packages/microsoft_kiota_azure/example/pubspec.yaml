@@ -4,10 +4,13 @@ version: 1.0.0
 publish_to: 'none'
 
 environment:
-  sdk: ^3.7.0
+  sdk: ^3.9.0
 
 dependencies:
   microsoft_kiota_azure:
     path: ../
   microsoft_kiota_bundle:
     path: ../../microsoft_kiota_bundle
+
+dev_dependencies:
+  lints: ^6.0.0

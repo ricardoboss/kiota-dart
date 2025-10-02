@@ -8,7 +8,8 @@ import 'package:microsoft_kiota_http/microsoft_kiota_http.dart';
 Future<void> main() async {
   // Setup
   ParseNodeFactoryRegistry
-          .defaultInstance.contentTypeAssociatedFactories['application/json'] =
+          .defaultInstance
+          .contentTypeAssociatedFactories['application/json'] =
       _CatFactsParseNodeFactory();
   final client = KiotaClientFactory.createClient();
   const authProvider = AnonymousAuthenticationProvider();
@@ -26,9 +27,7 @@ Future<void> main() async {
     RequestInformation(
       httpMethod: HttpMethod.get,
       urlTemplate: 'https://catfact.ninja/fact{?max_length}',
-      pathParameters: {
-        'max_length': 50,
-      },
+      pathParameters: {'max_length': 50},
     ),
   );
 

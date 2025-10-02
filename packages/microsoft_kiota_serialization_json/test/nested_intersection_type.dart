@@ -9,8 +9,8 @@ class NestedIntersectionType implements Parsable {
   Map<String, void Function(ParseNode p1)> getFieldDeserializers() {
     return {
       'nested': (p) => nested = p.getObjectValue(
-            IntersectionTypeMock.createFromDiscriminatorValue,
-          ),
+        IntersectionTypeMock.createFromDiscriminatorValue,
+      ),
     };
   }
 
