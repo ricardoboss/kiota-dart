@@ -38,21 +38,21 @@ void main() {
         urlTemplate: 'https://example.test/primitive',
       );
 
-      when(authProvider.authenticateRequest(info))
-          .thenAnswer((_) async => Future<void>.value());
+      when(
+        authProvider.authenticateRequest(info),
+      ).thenAnswer((_) async => Future<void>.value());
 
       when(client.send(any)).thenAnswer((_) async {
         return http.StreamedResponse(
           Stream.fromIterable([contentBytes]),
           200,
-          headers: {
-            'content-type': 'text/plain',
-          },
+          headers: {'content-type': 'text/plain'},
         );
       });
 
-      when(pNodeFactory.getRootParseNode('text/plain', contentBytes))
-          .thenReturn(parseNode);
+      when(
+        pNodeFactory.getRootParseNode('text/plain', contentBytes),
+      ).thenReturn(parseNode);
 
       when(parseNode.getStringValue()).thenReturn(stringContent);
 
@@ -84,21 +84,21 @@ void main() {
         urlTemplate: 'https://example.test/primitive',
       );
 
-      when(authProvider.authenticateRequest(info))
-          .thenAnswer((_) async => Future<void>.value());
+      when(
+        authProvider.authenticateRequest(info),
+      ).thenAnswer((_) async => Future<void>.value());
 
       when(client.send(any)).thenAnswer((_) async {
         return http.StreamedResponse(
           Stream.fromIterable([contentBytes]),
           200,
-          headers: {
-            'content-type': 'text/plain',
-          },
+          headers: {'content-type': 'text/plain'},
         );
       });
 
-      when(pNodeFactory.getRootParseNode('text/plain', contentBytes))
-          .thenReturn(parseNode);
+      when(
+        pNodeFactory.getRootParseNode('text/plain', contentBytes),
+      ).thenReturn(parseNode);
 
       when(parseNode.getStringValue()).thenReturn(stringContent);
 
@@ -130,21 +130,21 @@ void main() {
         urlTemplate: 'https://example.test/primitive',
       );
 
-      when(authProvider.authenticateRequest(info))
-          .thenAnswer((_) async => Future<void>.value());
+      when(
+        authProvider.authenticateRequest(info),
+      ).thenAnswer((_) async => Future<void>.value());
 
       when(client.send(any)).thenAnswer((_) async {
         return http.StreamedResponse(
           Stream.fromIterable([contentBytes]),
           200,
-          headers: {
-            'content-type': 'text/plain',
-          },
+          headers: {'content-type': 'text/plain'},
         );
       });
 
-      when(pNodeFactory.getRootParseNode('text/plain', contentBytes))
-          .thenReturn(parseNode);
+      when(
+        pNodeFactory.getRootParseNode('text/plain', contentBytes),
+      ).thenReturn(parseNode);
 
       when(parseNode.getStringValue()).thenReturn(stringContent);
 

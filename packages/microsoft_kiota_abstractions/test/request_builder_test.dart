@@ -16,12 +16,9 @@ class SampleRequestBuilder extends BaseRequestBuilder<SampleRequestBuilder> {
 
   @override
   SampleRequestBuilder clone() {
-    return SampleRequestBuilder(
-      id,
-      requestAdapter,
-      urlTemplate,
-      {...pathParameters},
-    );
+    return SampleRequestBuilder(id, requestAdapter, urlTemplate, {
+      ...pathParameters,
+    });
   }
 }
 
@@ -37,8 +34,9 @@ void main() {
       {'id': '1'},
     );
 
-    final newRequestBuilder =
-        requestBuilder.withUrl('https://graph.microsoft.com/v2.0/users/123');
+    final newRequestBuilder = requestBuilder.withUrl(
+      'https://graph.microsoft.com/v2.0/users/123',
+    );
 
     expect(newRequestBuilder.id, equals(1));
     expect(
@@ -50,9 +48,6 @@ void main() {
     );
 
     // make sure the original requestBuilder is not modified
-    expect(
-      requestBuilder.pathParameters,
-      equals({'id': '1'}),
-    );
+    expect(requestBuilder.pathParameters, equals({'id': '1'}));
   });
 }

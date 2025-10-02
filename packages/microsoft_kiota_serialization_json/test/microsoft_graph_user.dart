@@ -13,8 +13,9 @@ class MicrosoftGraphUser extends Parsable implements AdditionalDataHolder {
   MicrosoftGraphUser();
 
   factory MicrosoftGraphUser.createFromDiscriminator(ParseNode parseNode) {
-    final discriminatorValue =
-        parseNode.getChildNode('@odata.type')?.getStringValue();
+    final discriminatorValue = parseNode
+        .getChildNode('@odata.type')
+        ?.getStringValue();
     return switch (discriminatorValue) {
       'microsoft.graph.user' => MicrosoftGraphUser(),
       'microsoft.graph.group' => MicrosoftGraphUser(),

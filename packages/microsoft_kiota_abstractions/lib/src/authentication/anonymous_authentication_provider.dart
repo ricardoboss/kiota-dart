@@ -9,6 +9,5 @@ class AnonymousAuthenticationProvider implements AuthenticationProvider {
   Future<void> authenticateRequest(
     RequestInformation request, [
     Map<String, Object>? additionalAuthenticationContext,
-  ]) =>
-      Future<void>.value();
+  ]) => Future<void>.value();
 }

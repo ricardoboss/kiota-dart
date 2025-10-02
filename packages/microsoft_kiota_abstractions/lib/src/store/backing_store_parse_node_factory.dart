@@ -5,24 +5,23 @@ part of '../../microsoft_kiota_abstractions.dart';
 /// when deserializing.
 class BackingStoreParseNodeFactory extends ParseNodeProxyFactory {
   /// Creates a new instance of the [BackingStoreParseNodeFactory] class.
-  BackingStoreParseNodeFactory({
-    required super.concrete,
-  }) : super(
-          onBefore: (parsable) {
-            if (parsable is BackedModel) {
-              final model = parsable as BackedModel;
-              if (model.backingStore != null) {
-                model.backingStore!.initializationCompleted = false;
-              }
+  BackingStoreParseNodeFactory({required super.concrete})
+    : super(
+        onBefore: (parsable) {
+          if (parsable is BackedModel) {
+            final model = parsable as BackedModel;
+            if (model.backingStore != null) {
+              model.backingStore!.initializationCompleted = false;
             }
-          },
-          onAfter: (parsable) {
-            if (parsable is BackedModel) {
-              final model = parsable as BackedModel;
-              if (model.backingStore != null) {
-                model.backingStore!.initializationCompleted = true;
-              }
+          }
+        },
+        onAfter: (parsable) {
+          if (parsable is BackedModel) {
+            final model = parsable as BackedModel;
+            if (model.backingStore != null) {
+              model.backingStore!.initializationCompleted = true;
             }
-          },
-        );
+          }
+        },
+      );
 }

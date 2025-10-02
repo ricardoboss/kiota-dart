@@ -27,11 +27,12 @@ class MicrosoftGraphGroup extends Parsable implements AdditionalDataHolder {
     return <String, void Function(ParseNode node)>{
       'id': (node) => id = node.getStringValue(),
       'name': (node) => name = node.getStringValue(),
-      'leader': (node) => leader =
-          node.getObjectValue(MicrosoftGraphUser.createFromDiscriminator),
+      'leader': (node) => leader = node.getObjectValue(
+        MicrosoftGraphUser.createFromDiscriminator,
+      ),
       'members': (node) => members = node.getCollectionOfObjectValues(
-            MicrosoftGraphUser.createFromDiscriminator,
-          ),
+        MicrosoftGraphUser.createFromDiscriminator,
+      ),
     };
   }
 

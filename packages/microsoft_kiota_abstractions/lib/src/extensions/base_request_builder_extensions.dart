@@ -8,6 +8,7 @@ extension BaseRequestBuilderExtensions<T extends BaseRequestBuilder<T>>
   ///
   /// This utilizes the [RequestInformation.rawUrlKey] to store the raw url
   /// in the [pathParameters].
-  T withUrl(String rawUrl) => clone()
-    ..pathParameters.addOrReplace(RequestInformation.rawUrlKey, rawUrl);
+  T withUrl(String rawUrl) =>
+      clone()
+        ..pathParameters.addOrReplace(RequestInformation.rawUrlKey, rawUrl);
 }

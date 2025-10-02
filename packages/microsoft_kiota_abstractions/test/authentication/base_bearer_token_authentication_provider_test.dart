@@ -73,29 +73,30 @@ void main() {
     });
 
     test(
-        'Removes previous authorization header if claims are present in context',
-        () async {
-      final tokenProvider = MockAccessTokenProvider();
+      'Removes previous authorization header if claims are present in context',
+      () async {
+        final tokenProvider = MockAccessTokenProvider();
 
-      when(
-        tokenProvider.getAuthorizationToken(
-          Uri.parse('https://example.com/resource'),
-          {'claims': 'claims'},
-        ),
-      ).thenAnswer((_) async => 'token');
+        when(
+          tokenProvider.getAuthorizationToken(
+            Uri.parse('https://example.com/resource'),
+            {'claims': 'claims'},
+          ),
+        ).thenAnswer((_) async => 'token');
 
-      final provider = BaseBearerTokenAuthenticationProvider(tokenProvider);
+        final provider = BaseBearerTokenAuthenticationProvider(tokenProvider);
 
-      final request = RequestInformation(
-        urlTemplate: 'https://example.com/resource',
-      );
+        final request = RequestInformation(
+          urlTemplate: 'https://example.com/resource',
+        );
 
-      request.headers.put('Authorization', 'foo');
+        request.headers.put('Authorization', 'foo');
 
-      await provider.authenticateRequest(request, {'claims': 'claims'});
+        await provider.authenticateRequest(request, {'claims': 'claims'});
 
-      expect(request.headers.containsKey('Authorization'), isTrue);
-      expect(request.headers['Authorization'], equals({'Bearer token'}));
-    });
+        expect(request.headers.containsKey('Authorization'), isTrue);
+        expect(request.headers['Authorization'], equals({'Bearer token'}));
+      },
+    );
   });
 }

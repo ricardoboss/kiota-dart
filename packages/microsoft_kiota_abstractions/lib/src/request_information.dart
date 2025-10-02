@@ -7,8 +7,8 @@ class RequestInformation {
     this.httpMethod,
     this.urlTemplate,
     Map<String, dynamic>? pathParameters,
-  })  : queryParameters = CaseInsensitiveMap(),
-        pathParameters = CaseInsensitiveMap() {
+  }) : queryParameters = CaseInsensitiveMap(),
+       pathParameters = CaseInsensitiveMap() {
     if (pathParameters != null) {
       this.pathParameters.addAll(pathParameters);
     }
@@ -70,14 +70,16 @@ class RequestInformation {
 
     final substitutions = <String, dynamic>{};
     for (final urlTemplateParameter in pathParameters.entries) {
-      substitutions[urlTemplateParameter.key] =
-          _getSanitizedValue(urlTemplateParameter.value);
+      substitutions[urlTemplateParameter.key] = _getSanitizedValue(
+        urlTemplateParameter.value,
+      );
     }
 
     for (final queryStringParameter in queryParameters.entries) {
       if (queryStringParameter.value != null) {
-        substitutions[queryStringParameter.key] =
-            _getSanitizedValue(queryStringParameter.value);
+        substitutions[queryStringParameter.key] = _getSanitizedValue(
+          queryStringParameter.value,
+        );
       }
     }
 

@@ -16,8 +16,8 @@ class SerializationWriterFactoryRegistry implements SerializationWriterFactory {
 
   @override
   String get validContentType => throw UnsupportedError(
-        'The registry supports multiple content types. Get the registered factory instead.',
-      );
+    'The registry supports multiple content types. Get the registered factory instead.',
+  );
 
   @override
   SerializationWriter getSerializationWriter(String contentType) {
@@ -25,15 +25,19 @@ class SerializationWriterFactoryRegistry implements SerializationWriterFactory {
       throw ArgumentError('The content type cannot be empty.');
     }
 
-    final vendorSpecificContentType =
-        contentType.split(';').where((element) => element.isNotEmpty).first;
+    final vendorSpecificContentType = contentType
+        .split(';')
+        .where((element) => element.isNotEmpty)
+        .first;
     if (contentTypeAssociatedFactories.containsKey(vendorSpecificContentType)) {
       return contentTypeAssociatedFactories[vendorSpecificContentType]!
           .getSerializationWriter(vendorSpecificContentType);
     }
 
-    final cleanedContentType =
-        vendorSpecificContentType.replaceAll(contentTypeVendorCleanupRegex, '');
+    final cleanedContentType = vendorSpecificContentType.replaceAll(
+      contentTypeVendorCleanupRegex,
+      '',
+    );
     if (contentTypeAssociatedFactories.containsKey(cleanedContentType)) {
       return contentTypeAssociatedFactories[cleanedContentType]!
           .getSerializationWriter(cleanedContentType);

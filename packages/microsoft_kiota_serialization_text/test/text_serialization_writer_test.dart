@@ -21,11 +21,10 @@ void main() {
       final writer = TextSerializationWriter();
 
       expect(
-        () => writer.writeCollectionOfEnumValues(
-          null,
-          [HttpMethod.get, HttpMethod.post],
-          _httpMethodEnumSerializer,
-        ),
+        () => writer.writeCollectionOfEnumValues(null, [
+          HttpMethod.get,
+          HttpMethod.post,
+        ], _httpMethodEnumSerializer),
         throwsNoStructuredDataError,
       );
     });

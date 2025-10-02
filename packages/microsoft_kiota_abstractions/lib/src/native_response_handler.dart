@@ -12,11 +12,10 @@ class NativeResponseHandler implements ResponseHandler {
   ErrorMappings? errorMappings;
 
   @override
-  Future<ModelType?>
-      handleResponse<NativeResponseType, ModelType extends Parsable>(
-    NativeResponseType response, [
-    ErrorMappings? errorMapping,
-  ]) {
+  Future<ModelType?> handleResponse<
+    NativeResponseType,
+    ModelType extends Parsable
+  >(NativeResponseType response, [ErrorMappings? errorMapping]) {
     errorMappings = errorMapping;
     value = response;
 

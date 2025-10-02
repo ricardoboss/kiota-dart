@@ -52,19 +52,13 @@ void main() {
     test('getDateOnlyValue', () {
       final node = TextParseNode('2021-01-01');
 
-      expect(
-        node.getDateOnlyValue(),
-        equals(DateOnly.fromComponents(2021)),
-      );
+      expect(node.getDateOnlyValue(), equals(DateOnly.fromComponents(2021)));
     });
 
     test('getDateTimeValue', () {
       final node = TextParseNode('2021-01-01T00:00:00Z');
 
-      expect(
-        node.getDateTimeValue(),
-        equals(DateTime.utc(2021)),
-      );
+      expect(node.getDateTimeValue(), equals(DateTime.utc(2021)));
     });
 
     test('getDoubleValue', () {
@@ -78,24 +72,14 @@ void main() {
 
       expect(
         node.getDurationValue(),
-        equals(
-          const Duration(
-            days: 3,
-            hours: 4,
-            minutes: 5,
-            seconds: 6,
-          ),
-        ),
+        equals(const Duration(days: 3, hours: 4, minutes: 5, seconds: 6)),
       );
     });
 
     test('getGuidValue nil', () {
       final node = TextParseNode('00000000-0000-0000-0000-000000000000');
 
-      expect(
-        node.getGuidValue(),
-        equals(Namespace.nil.uuidValue),
-      );
+      expect(node.getGuidValue(), equals(Namespace.nil.uuidValue));
     });
 
     test('getGuidValue', () {
@@ -118,9 +102,7 @@ void main() {
 
       expect(
         node.getTimeOnlyValue(),
-        equals(
-          TimeOnly.fromComponents(12, 34, 56),
-        ),
+        equals(TimeOnly.fromComponents(12, 34, 56)),
       );
     });
 
@@ -176,9 +158,7 @@ void main() {
       final node = TextParseNode('value');
 
       expect(
-        () => node.getObjectValue<MultipartBody>(
-          (_) => MultipartBody(),
-        ),
+        () => node.getObjectValue<MultipartBody>((_) => MultipartBody()),
         throwsNoStructuredDataError,
       );
     });

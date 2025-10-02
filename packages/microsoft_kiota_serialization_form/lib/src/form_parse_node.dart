@@ -3,8 +3,8 @@ part of '../microsoft_kiota_serialization_form.dart';
 /// Represents a [ParseNode] that can be used to parse a form url encoded string.
 class FormParseNode implements ParseNode {
   FormParseNode(String value)
-      : _rawValue = value,
-        _fields = _parseFields(value);
+    : _rawValue = value,
+      _fields = _parseFields(value);
 
   static Map<String, String> _parseFields(String value) {
     final fields = value.split('&');
@@ -90,8 +90,9 @@ class FormParseNode implements ParseNode {
   Iterable<T> getCollectionOfEnumValues<T extends Enum>(
     EnumFactory<T> parser,
   ) sync* {
-    final collection =
-        _decodedValue.split(',').where((entry) => entry.isNotEmpty);
+    final collection = _decodedValue
+        .split(',')
+        .where((entry) => entry.isNotEmpty);
 
     for (final entry in collection) {
       final node = FormParseNode(entry)
@@ -116,8 +117,9 @@ class FormParseNode implements ParseNode {
 
   @override
   Iterable<T> getCollectionOfPrimitiveValues<T>() sync* {
-    final collection =
-        _decodedValue.split(',').where((entry) => entry.isNotEmpty);
+    final collection = _decodedValue
+        .split(',')
+        .where((entry) => entry.isNotEmpty);
 
     final T? Function(FormParseNode node) converter;
     switch (T) {

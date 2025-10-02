@@ -87,8 +87,9 @@ extension RequestInformationExtensions on RequestInformation {
       throw ArgumentError('Content type cannot be empty');
     }
 
-    return adapter.serializationWriterFactory
-        .getSerializationWriter(contentType);
+    return adapter.serializationWriterFactory.getSerializationWriter(
+      contentType,
+    );
   }
 
   /// Sets the content of the request to the provided collection of scalar
@@ -153,8 +154,11 @@ extension RequestInformationExtensions on RequestInformation {
       return;
     }
 
-    final config =
-        RequestConfiguration<T>(HttpHeaders(), [], createParameters());
+    final config = RequestConfiguration<T>(
+      HttpHeaders(),
+      [],
+      createParameters(),
+    );
     configurator(config);
 
     addQueryParameters(config.queryParameters.toMap());

@@ -43,19 +43,13 @@ void main() {
     test('getDateOnlyValue', () {
       final node = FormParseNode('2021-01-01');
 
-      expect(
-        node.getDateOnlyValue(),
-        equals(DateOnly.fromComponents(2021)),
-      );
+      expect(node.getDateOnlyValue(), equals(DateOnly.fromComponents(2021)));
     });
 
     test('getDateTimeValue', () {
       final node = FormParseNode('2021-01-01T00:00:00Z');
 
-      expect(
-        node.getDateTimeValue(),
-        equals(DateTime.utc(2021)),
-      );
+      expect(node.getDateTimeValue(), equals(DateTime.utc(2021)));
     });
 
     test('getDoubleValue', () {
@@ -69,24 +63,14 @@ void main() {
 
       expect(
         node.getDurationValue(),
-        equals(
-          const Duration(
-            days: 3,
-            hours: 4,
-            minutes: 5,
-            seconds: 6,
-          ),
-        ),
+        equals(const Duration(days: 3, hours: 4, minutes: 5, seconds: 6)),
       );
     });
 
     test('getGuidValue nil', () {
       final node = FormParseNode('00000000-0000-0000-0000-000000000000');
 
-      expect(
-        node.getGuidValue(),
-        equals(Namespace.nil.uuidValue),
-      );
+      expect(node.getGuidValue(), equals(Namespace.nil.uuidValue));
     });
 
     test('getGuidValue', () {
@@ -109,9 +93,7 @@ void main() {
 
       expect(
         node.getTimeOnlyValue(),
-        equals(
-          TimeOnly.fromComponents(12, 34, 56),
-        ),
+        equals(TimeOnly.fromComponents(12, 34, 56)),
       );
     });
 
@@ -150,10 +132,7 @@ void main() {
     test('getCollectionOfPrimitiveValues', () {
       final node = FormParseNode('false,123,null,456,true');
 
-      expect(
-        node.getCollectionOfPrimitiveValues<int>(),
-        equals([123, 456]),
-      );
+      expect(node.getCollectionOfPrimitiveValues<int>(), equals([123, 456]));
 
       expect(
         node.getCollectionOfPrimitiveValues<bool>(),
@@ -164,8 +143,9 @@ void main() {
     test('getCollectionOfEnumValues', () {
       final node = FormParseNode('get,post');
 
-      final values =
-          node.getCollectionOfEnumValues<HttpMethod>(_httpMethodEnumFactory);
+      final values = node.getCollectionOfEnumValues<HttpMethod>(
+        _httpMethodEnumFactory,
+      );
 
       expect(values, equals([HttpMethod.get, HttpMethod.post]));
     });
@@ -173,8 +153,9 @@ void main() {
     test('getCollectionOfEnumValues is case sensitive', () {
       final node = FormParseNode('GET,Post');
 
-      final values =
-          node.getCollectionOfEnumValues<HttpMethod>(_httpMethodEnumFactory);
+      final values = node.getCollectionOfEnumValues<HttpMethod>(
+        _httpMethodEnumFactory,
+      );
 
       expect(values, equals([]));
     });
@@ -198,8 +179,9 @@ void main() {
     });
 
     test('FormParseNode parses fields', () {
-      final node =
-          FormParseNode('filename=file.txt&size=123&type=null&temp=true');
+      final node = FormParseNode(
+        'filename=file.txt&size=123&type=null&temp=true',
+      );
 
       final filename = node.getChildNode('filename');
       final size = node.getChildNode('size');

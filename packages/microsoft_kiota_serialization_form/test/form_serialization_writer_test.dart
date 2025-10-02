@@ -17,11 +17,10 @@ void main() {
 
     test('writeCollectionOfEnumValues', () {
       final writer = FormSerializationWriter()
-        ..writeCollectionOfEnumValues(
-          'key',
-          [HttpMethod.get, HttpMethod.post],
-          _httpMethodEnumSerializer,
-        );
+        ..writeCollectionOfEnumValues('key', [
+          HttpMethod.get,
+          HttpMethod.post,
+        ], _httpMethodEnumSerializer);
 
       expect(
         utf8.decode(writer.getSerializedContent()),

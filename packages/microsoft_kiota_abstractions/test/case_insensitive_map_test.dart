@@ -11,10 +11,7 @@ void main() {
         ..map((name, values) {
           return MapEntry(name, values.join(', '));
         });
-      expect(
-        headers['key'],
-        {'value'},
-      );
+      expect(headers['key'], {'value'});
     });
   });
 }

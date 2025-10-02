@@ -8,8 +8,10 @@ void main() {
     test('getParseNodeForJsonContentType', () {
       final json = utf8.encode('{"key":"value"}');
       final factory = JsonParseNodeFactory();
-      final jsonParseNode =
-          factory.getRootParseNode(factory.validContentType, json);
+      final jsonParseNode = factory.getRootParseNode(
+        factory.validContentType,
+        json,
+      );
       expect(jsonParseNode, isNotNull);
     });
 

@@ -10,12 +10,12 @@ class ApiKeyAuthenticationProvider implements AuthenticationProvider {
     required String parameterName,
     required ApiKeyLocation keyLocation,
     Iterable<String> allowedHosts = const [],
-  })  : assert(apiKey.isNotEmpty, 'apiKey cannot be empty'),
-        assert(parameterName.isNotEmpty, 'parameterName cannot be empty'),
-        _apiKey = apiKey,
-        _parameterName = parameterName,
-        _keyLocation = keyLocation,
-        _allowedHostsValidator = AllowedHostsValidator(allowedHosts);
+  }) : assert(apiKey.isNotEmpty, 'apiKey cannot be empty'),
+       assert(parameterName.isNotEmpty, 'parameterName cannot be empty'),
+       _apiKey = apiKey,
+       _parameterName = parameterName,
+       _keyLocation = keyLocation,
+       _allowedHostsValidator = AllowedHostsValidator(allowedHosts);
 
   final String _apiKey;
   final String _parameterName;

@@ -9,8 +9,7 @@ void main() async {
     final client = MockClient((request) {
       if (request.url.path == '/tenantId/oauth2/v2.0/devicecode') {
         return Future.value(
-          http.Response(
-            '''
+          http.Response('''
         {
           "user_code": "A62NXK96N",
           "device_code": "foo",
@@ -18,16 +17,13 @@ void main() async {
           "expires_in": 900,
           "interval": 5,
           "message": "To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code A62NXK96N to authenticate."
-        }''',
-            200,
-          ),
+        }''', 200),
         );
       } else if (request.url.path == '/tenantId/oauth2/v2.0/token') {
         if (firstPoll) {
           firstPoll = false;
           return Future.value(
-            http.Response(
-              '''
+            http.Response('''
           {
             "error": "authorization_pending",
             "error_description": "AADSTS70016: OAuth 2.0 device flow error. Authorization is pending. Continue polling. Trace ID: 9aac4ee6-e730-4929-b3ee-6ea7b67e1d00 Correlation ID: cad65606-26ba-423f-9cab-fdd75756e364 Timestamp: 2025-03-04 17:46:18Z",
@@ -38,23 +34,18 @@ void main() async {
             "trace_id": "9aac4ee6-e730-4929-b3ee-6ea7b67e1d00",
             "correlation_id": "cad65606-26ba-423f-9cab-fdd75756e364",
             "error_uri": "https://login.microsoftonline.com/error?code=70016"
-          }''',
-              400,
-            ),
+          }''', 400),
           );
         }
         return Future.value(
-          http.Response(
-            '''
+          http.Response('''
         {
           "token_type": "Bearer",
           "scope": "scope",
           "expires_in": 3600,
           "ext_expires_in": 0,
           "access_token": "accessToken"
-        }''',
-            200,
-          ),
+        }''', 200),
         );
       }
       return Future.value(http.Response('', 404));
@@ -67,8 +58,9 @@ void main() async {
       AzureNationalClouds.usGovernment,
       client,
     );
-    final accessToken =
-        await credential.getToken(TokenRequestContext(scopes: ['scope']));
+    final accessToken = await credential.getToken(
+      TokenRequestContext(scopes: ['scope']),
+    );
     expect(called, true);
     expect(accessToken.token, 'accessToken');
   });
@@ -77,8 +69,7 @@ void main() async {
     final client = MockClient((request) {
       if (request.url.path == '/tenantId/oauth2/v2.0/devicecode') {
         return Future.value(
-          http.Response(
-            '''
+          http.Response('''
         {
           "user_code": "A62NXK96N",
           "device_code": "foo",
@@ -86,16 +77,13 @@ void main() async {
           "expires_in": 900,
           "interval": 5,
           "message": "To sign in, use a web browser to open the page https://microsoft.com/devicelogin and enter the code A62NXK96N to authenticate."
-        }''',
-            200,
-          ),
+        }''', 200),
         );
       } else if (request.url.path == '/tenantId/oauth2/v2.0/token') {
         pollCount++;
         if (pollCount == 0) {
           return Future.value(
-            http.Response(
-              '''
+            http.Response('''
           {
             "error": "authorization_pending",
             "error_description": "AADSTS70016: OAuth 2.0 device flow error. Authorization is pending. Continue polling. Trace ID: 9aac4ee6-e730-4929-b3ee-6ea7b67e1d00 Correlation ID: cad65606-26ba-423f-9cab-fdd75756e364 Timestamp: 2025-03-04 17:46:18Z",
@@ -106,37 +94,29 @@ void main() async {
             "trace_id": "9aac4ee6-e730-4929-b3ee-6ea7b67e1d00",
             "correlation_id": "cad65606-26ba-423f-9cab-fdd75756e364",
             "error_uri": "https://login.microsoftonline.com/error?code=70016"
-          }''',
-              400,
-            ),
+          }''', 400),
           );
         } else if (pollCount == 1) {
           return Future.value(
-            http.Response(
-              '''
+            http.Response('''
               {
                 "token_type": "Bearer",
                 "scope": "scope",
                 "expires_in": 1,
                 "ext_expires_in": 0,
                 "access_token": "expired"
-              }''',
-              200,
-            ),
+              }''', 200),
           );
         }
         return Future.value(
-          http.Response(
-            '''
+          http.Response('''
               {
                 "token_type": "Bearer",
                 "scope": "scope",
                 "expires_in": 3600,
                 "ext_expires_in": 0,
                 "access_token": "accessToken"
-              }''',
-            200,
-          ),
+              }''', 200),
         );
       }
       return Future.value(http.Response('', 404));
@@ -149,13 +129,15 @@ void main() async {
       AzureNationalClouds.usGovernment,
       client,
     );
-    var accessToken =
-        await credential.getToken(TokenRequestContext(scopes: ['scope']));
+    var accessToken = await credential.getToken(
+      TokenRequestContext(scopes: ['scope']),
+    );
     expect(called, true);
     expect(accessToken.token, 'expired');
     await Future<void>.delayed(const Duration(seconds: 2));
-    accessToken =
-        await credential.getToken(TokenRequestContext(scopes: ['scope']));
+    accessToken = await credential.getToken(
+      TokenRequestContext(scopes: ['scope']),
+    );
     expect(accessToken.token, 'accessToken');
   });
 }

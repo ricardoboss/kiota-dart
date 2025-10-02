@@ -11,10 +11,10 @@ abstract class SerializationWriterProxyFactory
     ParsableHook? onBefore,
     ParsableHook? onAfter,
     void Function(Parsable, SerializationWriter)? onStart,
-  })  : _concrete = concrete,
-        _onBefore = onBefore,
-        _onAfter = onAfter,
-        _onStart = onStart;
+  }) : _concrete = concrete,
+       _onBefore = onBefore,
+       _onAfter = onAfter,
+       _onStart = onStart;
 
   final SerializationWriterFactory _concrete;
   final ParsableHook? _onBefore;

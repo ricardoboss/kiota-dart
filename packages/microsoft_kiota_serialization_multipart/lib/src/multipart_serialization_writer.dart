@@ -13,7 +13,7 @@ class MultipartSerializationWriter implements SerializationWriter {
 
   @override
   void Function(Parsable p1, SerializationWriter p2)?
-      onStartObjectSerialization;
+  onStartObjectSerialization;
 
   @override
   Uint8List getSerializedContent() {

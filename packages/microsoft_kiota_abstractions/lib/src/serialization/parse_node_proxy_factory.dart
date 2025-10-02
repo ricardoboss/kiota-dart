@@ -8,9 +8,9 @@ abstract class ParseNodeProxyFactory implements ParseNodeFactory {
     required ParseNodeFactory concrete,
     ParsableHook? onBefore,
     ParsableHook? onAfter,
-  })  : _concrete = concrete,
-        _onBefore = onBefore,
-        _onAfter = onAfter;
+  }) : _concrete = concrete,
+       _onBefore = onBefore,
+       _onAfter = onAfter;
 
   final ParseNodeFactory _concrete;
   final ParsableHook? _onBefore;
